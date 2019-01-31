@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vattima.lego.data.ibatis.mapper.BricklinkSaleItemMapper">
+    <resultMap type="com.vattima.lego.data.dto.BricklinkSaleItem" id="bricklinkSaleItemResultMap">
+        <result column="bl_sale_item_id"          property="blSaleItemId"/>
+        <result column="bl_item_id"               property="blItemId"/>
+        <result column="inventory_id"             property="inventoryId"/>
+        <result column="quantity"                 property="quantity"/>
+        <result column="new_or_used"              property="newOrUsed"/>
+        <result column="completeness"             property="completeness"/>
+        <result column="unit_price"               property="unitPrice"/>
+        <result column="description"              property="description"/>
+        <result column="has_extended_description" property="hasExtendedDescription"/>
+        <result column="date_created"             property="dateCreated"/>
+    </resultMap>
+</mapper>

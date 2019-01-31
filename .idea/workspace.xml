@@ -1,0 +1,1483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5a7c5d83-1519-4644-9d1e-960212ea53cb" name="Default" comment="- Refactor Bricklink Secret API to Ajax&#10;- Introduce BricklinkSaleItem">
+      <change beforePath="$PROJECT_DIR$/../bricklink-rest/src/main/java/com/bricklink/api/rest/configuration/BricklinkRestProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/../bricklink-rest/src/main/java/com/bricklink/api/rest/configuration/BricklinkRestProperties.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/../bricklink-rest/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/bricklink_api_example$BricklinkTestMain.ic" NAME="BricklinkTestMain Coverage Results" MODIFIED="1548729256541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.bricklink.api.example.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="a925261_dev_lego@162.215.248.220" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MissingItemsRemediator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/example/MissingItemsRemediator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1428">
+              <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BricklinkConfiguration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/BricklinkConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorkerConfiguration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/WorkerConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BricklinkTestMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/example/BricklinkTestMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1955">
+              <caret line="149" column="29" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InventoryPriceCrawler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/InventoryPriceCrawler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BricklinkRestConfiguration.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../bricklink-rest/src/main/java/com/bricklink/api/rest/configuration/BricklinkRestConfiguration.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit4 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>815</find>
+      <find>inventory_index</find>
+      <find>10022</find>
+      <find>1233</find>
+      <find>Item Number not found in DB</find>
+      <find>Inventory index \[InventoryIndex\(.*quantity=[2-9]</find>
+      <find>skippin</find>
+      <find>1241</find>
+      <find>WRAP_ROOT_VALUE</find>
+      <find>@Component</find>
+      <find>^(private\s.*+\s\w+?).*$</find>
+      <find>bricklinkInventoryId</find>
+      <find>,+</find>
+      <find>:\s.*$</find>
+      <find>gsonjackson</find>
+      <find>salePrice</find>
+      <find>, salePrice</find>
+      <find>box</find>
+      <find>new Gson</find>
+      <find>mDisplaySalePrice</find>
+      <find>mDisplaySalePrice=</find>
+      <find>US $5.</find>
+      <find>, mDisplaySalePrice=</find>
+      <find>dbunit</find>
+      <find>h2</find>
+      <find>BricklinkSaleItemMapper</find>
+      <find>bricklink.consumer.key</find>
+      <find>client_se</find>
+      <find>consumer:</find>
+      <find>bricklinkClient.</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>:</replace>
+      <replace>.</replace>
+      <replace>,&quot;</replace>
+      <replace>\t</replace>
+      <replace>\U$1\E</replace>
+      <replace>$1;</replace>
+      <replace>,</replace>
+      <replace>;</replace>
+      <replace>new Jackson</replace>
+      <replace>bricklinkRestClient.</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/secret/rest/model/v1/Item.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/secret/rest/model/v1/Type.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/Condition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/Party.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/Transactions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/TransactionItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/Transaction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/ItemDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/ItemMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/vattima/lego/data/ibatis/mapper/TransactionMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BrinklinkItemMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/TransactionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/InventoryIndexDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/InventoryIndexMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/InventoryIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/example/InventoryIndexLoader.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/456da771-88f5-4105-964f-601099287b6b/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/rest/model/v1/Inventory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/rest/BricklinkClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/example/DaoTester.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/secret/rest/BricklinkSecretClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/secret/rest/support/BricklinkSecretMeta.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/model/v1/AjaxResult.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/support/BricklinkSecretMeta.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/support/SearchProductResult.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/support/CatalogItemsForSaleResult.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/BricklinkAjaxClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/model/v1/ItemForSaleDeserializer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/model/v1/ItemForSale.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/BricklinkInventoryWork.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/vattima/lego/data/ibatis/mapper/BricklinkInventoryMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/BricklinkInventoryDao.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/1bce0651-08c2-4e52-9205-3c03321ee6b6/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/BricklinkSaleItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/BricklinkSaleItemDao.java" />
+        <option value="$PROJECT_DIR$/src/test/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/data.sql" />
+        <option value="$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/TestDataSourceConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BricklinkInventoryMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BricklinkSaleItemMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/TransactionMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/vattima/lego/data/ibatis/mapper/BricklinkSaleItemMapper.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/ItemDaoTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/example/MissingItemsRemediator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/BricklinkConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/WorkerConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bricklink/api/example/BricklinkTestMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/InventoryPriceCrawler.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\dev\m2_repo" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="lookForNested" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Bricklink API Example" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Bricklink API Example" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="lego-sheet" pattern="com.vattima.lego.sheet..*" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="140" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="970" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages ProjectPane="true" />
+      <abbreviatePackageNames ProjectPane="false" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bricklink-api-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bricklink-api-example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bricklink-api-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bricklink-api-example" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bricklink-api-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bricklink-api-example" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bricklink-api-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bricklink-api-example" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="bricklink-api-example" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bricklink-rest" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="lego-sheet">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+              <item name="src/main/java" type="cbb8eebc:String" user="src/main/java" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+              <item name="src/main/java" type="cbb8eebc:String" user="src/main/java" />
+              <item name="com/vattima/lego/sheet/api" type="cbb8eebc:String" user="com/vattima/lego/sheet/api" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+              <item name="src/main/java" type="cbb8eebc:String" user="src/main/java" />
+              <item name="com/vattima/lego/sheet/configuration" type="cbb8eebc:String" user="com/vattima/lego/sheet/configuration" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+              <item name="src/main/java" type="cbb8eebc:String" user="src/main/java" />
+              <item name="com/vattima/lego/sheet/meta" type="cbb8eebc:String" user="com/vattima/lego/sheet/meta" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="bricklink-api-example" type="cbb8eebc:String" user="bricklink-api-example" />
+              <item name="src/main/java" type="cbb8eebc:String" user="src/main/java" />
+              <item name="com/vattima/lego/sheet/model" type="cbb8eebc:String" user="com/vattima/lego/sheet/model" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DbUnitExtractorExcludeColumns" value="" />
+    <property name="DbUnitExtractorIncludeSchema" value="true" />
+    <property name="DbUnitExtractorSelectedDataSource" value="" />
+    <property name="DbUnitExtractorSkipEmpty" value="true" />
+    <property name="DbUnitExtractorSkipNull" value="false" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bricklink-rest/pom.xml" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="DbUnit Extractor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.vattima.lego.data.dao" />
+      <recent name="com.bricklink.api.html.support" />
+      <recent name="com.vattima.lego.sheet.service" />
+      <recent name="com.vattima.lego.sheet.meta" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\workspaces\bricklink-api-example\src\test\java\com\vattima\lego\data\dao" />
+      <recent name="D:\dev\workspaces\bricklink-api-example\src\main\resources\com\vattima\lego\data\ibatis\mapper" />
+      <recent name="D:\dev\workspaces\bricklink-api-example\src\main\resources\com.vattima.lego.data.ibatis\mapper" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.bricklink.api.example" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\workspaces\bricklink-api-example\src\main\resources\com\vattima\lego\data\ibatis\mapper" />
+      <recent name="D:\dev\workspaces\bricklink-api-example\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+    <option name="contentProportion" value="0.09401366" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.InventoryPriceCrawler">
+    <configuration name="DaoTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bricklink.api.example.DaoTester" />
+      <module name="bricklink-api-example" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bricklink.api.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="ItemDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bricklink-api-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vattima.lego.data.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.vattima.lego.data.dao" />
+      <option name="MAIN_CLASS_NAME" value="com.vattima.lego.data.dao.ItemDaoTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="BricklinkTestMain" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="bricklink-api-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bricklink.api.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bricklink.api.example.BricklinkTestMain" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration name="InventoryPriceCrawler" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="bricklink-api-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.vattima.lego.inventory.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.vattima.lego.inventory.InventoryPriceCrawler" />
+      <option name="DEBUG_MODE" value="true" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration name="MissingItemsRemediator" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="bricklink-api-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bricklink.api.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bricklink.api.example.MissingItemsRemediator" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Application.DaoTester" />
+      <item itemvalue="Spring Boot.BricklinkTestMain" />
+      <item itemvalue="Spring Boot.MissingItemsRemediator" />
+      <item itemvalue="Spring Boot.InventoryPriceCrawler" />
+      <item itemvalue="JUnit.ItemDaoTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.InventoryPriceCrawler" />
+        <item itemvalue="JUnit.ItemDaoTest" />
+        <item itemvalue="Spring Boot.BricklinkTestMain" />
+        <item itemvalue="Application.DaoTester" />
+        <item itemvalue="Spring Boot.MissingItemsRemediator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a7c5d83-1519-4644-9d1e-960212ea53cb" name="Default" comment="" />
+      <created>1527288066216</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1527288066216</updated>
+      <workItem from="1527288068490" duration="132000" />
+      <workItem from="1527298481503" duration="355000" />
+      <workItem from="1528513506832" duration="116000" />
+      <workItem from="1528513637318" duration="685000" />
+      <workItem from="1538875848725" duration="602000" />
+      <workItem from="1539046558582" duration="624000" />
+      <workItem from="1539489078830" duration="2231000" />
+      <workItem from="1539553999770" duration="1585000" />
+      <workItem from="1539646984260" duration="7718000" />
+      <workItem from="1539655687560" duration="1361000" />
+      <workItem from="1539815832703" duration="4037000" />
+      <workItem from="1539899144118" duration="3412000" />
+      <workItem from="1540254720859" duration="2833000" />
+      <workItem from="1540768224845" duration="2574000" />
+      <workItem from="1540773645682" duration="3698000" />
+      <workItem from="1540857242785" duration="20067000" />
+      <workItem from="1541025754706" duration="13109000" />
+      <workItem from="1541122034209" duration="2311000" />
+      <workItem from="1541373682502" duration="4328000" />
+      <workItem from="1541435344624" duration="23930000" />
+      <workItem from="1541510336550" duration="20520000" />
+      <workItem from="1541605959017" duration="1003000" />
+      <workItem from="1541644174083" duration="3289000" />
+      <workItem from="1541808069651" duration="39267000" />
+      <workItem from="1542248254615" duration="3755000" />
+      <workItem from="1542336598880" duration="1197000" />
+      <workItem from="1542844826756" duration="5629000" />
+      <workItem from="1543795142315" duration="3224000" />
+      <workItem from="1545499634386" duration="1509000" />
+      <workItem from="1546013178596" duration="8832000" />
+      <workItem from="1546814980620" duration="8150000" />
+      <workItem from="1546870878385" duration="822000" />
+      <workItem from="1547597262914" duration="2824000" />
+      <workItem from="1547647439162" duration="7482000" />
+      <workItem from="1547841103946" duration="49209000" />
+      <workItem from="1548170943895" duration="16559000" />
+      <workItem from="1548342380785" duration="31001000" />
+      <workItem from="1548680987601" duration="29908000" />
+      <workItem from="1548801736632" duration="6631000" />
+      <workItem from="1548812889410" duration="5026000" />
+      <workItem from="1548865915051" duration="8555000" />
+      <workItem from="1548978442884" duration="588000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added Selenium Driver sample">
+      <created>1539657041434</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1539657041434</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Dug-in more to reverse engineer bricklink">
+      <created>1539831710506</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1539831710506</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding catalog search">
+      <created>1539912226611</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1539912226611</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added Selenium call for: Get internal BrickLink itemId for a given set number">
+      <created>1540860050014</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1540860050014</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Foundation work for loading Lego google spreadsheet">
+      <created>1540943890886</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1540943890886</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Foundation work for loading Lego google spreadsheet">
+      <created>1541020031640</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1541020031640</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Refactored Google Sheets Service into service layers">
+      <created>1541030065879</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1541030065879</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added column descriptors to sheet service">
+      <created>1541033999586</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1541033999586</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added trimming to CellDescriptors">
+      <created>1541034353391</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1541034353391</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Wiring in mysql and mybatis">
+      <created>1541122213366</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1541122213366</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Further refinement of Mybatis, Lego Sheet Service, and Bricklink html api&#10;&#10;- Expanded mybatis configuration and mappers&#10;- Refactored bricklink api packages&#10;- Introduced Htmlunit as a potential replacement for Selenium">
+      <created>1541517344745</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1541517344745</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactoring bricklink layer into Feign rest and a Feign HtmlUnit implementation">
+      <created>1541595546350</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1541595546350</updated>
+    </task>
+    <task id="LOCAL-00013" summary="- Introduces ResponseAdapter and ResponseAdapterRegistry&#10;- Further improvements in Html scraping of Bricklink CatalogItem">
+      <created>1542064017437</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1542064017437</updated>
+    </task>
+    <task id="LOCAL-00014" summary="- Introduces ResponseAdapter and ResponseAdapterRegistry&#10;- Further improvements in Html scraping of Bricklink CatalogItem">
+      <created>1548087891468</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1548087891468</updated>
+    </task>
+    <task id="LOCAL-00015" summary="- Introduces Transaction DAO/Mapper and InventoryIndex DAO/Mapper">
+      <created>1548379071577</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1548379071577</updated>
+    </task>
+    <task id="LOCAL-00016" summary="- Introduces BricklinkInventory DAO/Mapper">
+      <created>1548381596347</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1548381596347</updated>
+    </task>
+    <task id="LOCAL-00017" summary="- First iteration of Bricklink Inventory crawler">
+      <created>1548387774821</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1548387774822</updated>
+    </task>
+    <task id="LOCAL-00018" summary="- Refactor Bricklink Secret API to Ajax&#10;- Introduce BricklinkSaleItem">
+      <created>1548811663502</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1548811663502</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="ItemDaoTest - 2019.01.29 at 22h 15m 30s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.29 at 22h 16m 03s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 11h 40m 14s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 11h 43m 42s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 11h 44m 46s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 12h 59m 47s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 13h 01m 18s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 13h 02m 35s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 13h 17m 21s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ItemDaoTest - 2019.01.30 at 13h 23m 16s.xml">
+      <configuration name="ItemDaoTest" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="350688000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="2576" height="1426" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5011924" side_tool="true" weight="0.33848533" />
+      <window_info anchor="bottom" id="Run Dashboard" order="14" visible="true" weight="0.26506954" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.25476947" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.24652241" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.26043278" />
+      <window_info anchor="bottom" id="Spring" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14030206" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.4989083" visible="true" weight="0.13513513" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.62983" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.49880764" weight="0.2187017" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32998455" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32380217" />
+      <window_info anchor="right" id="Coverage" order="4" sideWeight="0.5010917" side_tool="true" weight="0.13076311" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Spring" order="11" />
+      <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.49880764" weight="0.16692427" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.3408037" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5011924" side_tool="true" weight="0.33848533" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32998455" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14348172" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.24652241" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.22774245" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32457495" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.08386327" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.43044823" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="14" visible="true" weight="0.41885626" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Selenium Driver sample" />
+    <MESSAGE value="Dug-in more to reverse engineer bricklink" />
+    <MESSAGE value="Adding catalog search" />
+    <MESSAGE value="Added Selenium call for: Get internal BrickLink itemId for a given set number" />
+    <MESSAGE value="Foundation work for loading Lego google spreadsheet" />
+    <MESSAGE value="Refactored Google Sheets Service into service layers" />
+    <MESSAGE value="Added column descriptors to sheet service" />
+    <MESSAGE value="Added trimming to CellDescriptors" />
+    <MESSAGE value="Wiring in mysql and mybatis" />
+    <MESSAGE value="Further refinement of Mybatis, Lego Sheet Service, and Bricklink html api&#10;&#10;- Expanded mybatis configuration and mappers&#10;- Refactored bricklink api packages&#10;- Introduced Htmlunit as a potential replacement for Selenium" />
+    <MESSAGE value="Refactoring bricklink layer into Feign rest and a Feign HtmlUnit implementation" />
+    <MESSAGE value="- Introduces ResponseAdapter and ResponseAdapterRegistry&#10;- Further improvements in Html scraping of Bricklink CatalogItem" />
+    <MESSAGE value="- Introduces Transaction DAO/Mapper and InventoryIndex DAO/Mapper" />
+    <MESSAGE value="- Introduces BricklinkInventory DAO/Mapper" />
+    <MESSAGE value="- First iteration of Bricklink Inventory crawler" />
+    <MESSAGE value="- Refactor Bricklink Secret API to Ajax&#10;- Introduce BricklinkSaleItem" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Refactor Bricklink Secret API to Ajax&#10;- Introduce BricklinkSaleItem" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot-autoconfigure/2.0.5.RELEASE/spring-boot-autoconfigure-2.0.5.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/jdbc/DataSourceProperties.java</url>
+          <line>281</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/ItemDaoTest.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="311" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="313" />
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>transactionItemsToBuild &gt; 1</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>item.getItemNumber().equals(&quot;1252-1&quot;)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>item.getItemId()==8</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>iwh</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>catalogItemsForSaleResult.getList()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>jsonParser</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>node.fieldNames()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>NumberFormat.getInstance().parse(node.asText(), new ParsePosition(4))</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.text.NumberFormat,java.text.ParsePosition</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>NumberFormat.getInstance().parse(node.asText());</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.text.NumberFormat</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>Double.valueOf(node.asText().substring(4))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>node.asText()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>jsonParser.readValueAs(String.class);</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot/2.1.2.RELEASE/spring-boot-2.1.2.RELEASE.jar!/org/springframework/boot/SpringApplication.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="523" selection-start-line="523" selection-end-line="523" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/com/google/code/gson/gson/2.8.5/gson-2.8.5-sources.jar!/com/google/gson/Gson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/io/github/openfeign/feign-gson/9.5.0/feign-gson-9.5.0.jar!/feign/gson/GsonFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/io/github/openfeign/feign-gson/9.5.0/feign-gson-9.5.0.jar!/feign/gson/GsonDecoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/com/google/code/gson/gson/2.8.5/gson-2.8.5-sources.jar!/com/google/gson/TypeAdapterFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="920">
+          <caret line="157" column="48" lean-forward="true" selection-start-line="157" selection-start-column="48" selection-end-line="157" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/com/fasterxml/jackson/core/jackson-databind/2.9.8/jackson-databind-2.9.8.jar!/com/fasterxml/jackson/databind/deser/std/StdDeserializer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/model/v1/ItemForSaleDeserializer.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/BricklinkAjaxClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/support/CatalogItemsForSaleResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/ajax/model/v1/ItemForSale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../tools/jdk1.8.0_172/src.zip!/java/util/function/Consumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/BricklinkItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="4" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/1bce0651-08c2-4e52-9205-3c03321ee6b6/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="103" selection-start-line="103" selection-end-line="112" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/BricklinkInventoryWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" selection-start-line="12" selection-end-line="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/vattima/lego/data/ibatis/mapper/BricklinkInventoryMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="9" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dto/BricklinkSaleItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" selection-start-line="12" selection-end-line="21" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/example/InventoryIndexLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="60" column="34" selection-start-line="60" selection-start-column="34" selection-end-line="60" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/InventoryIndexDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" selection-start-line="9" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://1bce0651-08c2-4e52-9205-3c03321ee6b6/schema/a925261_dev_lego/table/bricklink_inventory">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/BricklinkSaleItemDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../m2_repo/com/github/springtestdbunit/spring-test-dbunit/1.3.0/spring-test-dbunit-1.3.0.pom">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot-starter-parent/2.1.2.RELEASE/spring-boot-starter-parent-2.1.2.RELEASE.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot-dependencies/2.1.2.RELEASE/spring-boot-dependencies-2.1.2.RELEASE.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="646" selection-start-line="646" selection-end-line="650" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/org/springframework/spring-tx/5.1.4.RELEASE/spring-tx-5.1.4.RELEASE.jar!/org/springframework/transaction/PlatformTransactionManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/TestDataSourceConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="28" column="58" selection-start-line="28" selection-start-column="58" selection-end-line="28" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot-autoconfigure/2.1.2.RELEASE/spring-boot-autoconfigure-2.1.2.RELEASE.jar!/org/springframework/boot/autoconfigure/SpringBootApplication.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="47" column="34" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/ItemDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding>
+            <element signature="e#518#519#0" expanded="true" />
+            <element signature="e#579#580#0" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/dao/BricklinkInventoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#480#481#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BricklinkInventoryMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BricklinkSaleItemMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/BrinklinkItemMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/InventoryIndexMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/ItemMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/data/ibatis/mapper/TransactionMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/vattima/lego/data/ibatis/mapper/BricklinkSaleItemMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/client_secret.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/vattima/lego/data/dao/ItemDaoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="15" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot/2.1.2.RELEASE/spring-boot-2.1.2.RELEASE.jar!/org/springframework/boot/context/properties/EnableConfigurationPropertiesImportSelector.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../m2_repo/org/springframework/boot/spring-boot/2.1.2.RELEASE/spring-boot-2.1.2.RELEASE.jar!/org/springframework/boot/context/properties/EnableConfigurationProperties.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/example/MissingItemsRemediator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/BricklinkConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/configuration/WorkerConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bricklink/api/example/BricklinkTestMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="149" column="29" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/vattima/lego/inventory/InventoryPriceCrawler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://1bce0651-08c2-4e52-9205-3c03321ee6b6/schema/a925261_dev_lego/table/bricklink_sale_item">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../bricklink-rest/src/main/java/com/bricklink/api/rest/configuration/BricklinkRestConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>bricklink-api-example</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.google.code.gson:gson:2.8.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>lego-sheet</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="lego-sheet" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
