@@ -1,0 +1,53 @@
+spring:
+   jmx:
+      enabled: false
+   application:
+     name: Lego Bricklink Inventory
+   datasource:
+      url:
+      username:
+      password:
+      driver-class-name: com.mysql.jdbc.Driver
+      hikari:
+         connection-timeout: 60000
+
+logging:
+   level:
+      root: INFO
+      com.vattima.lego.data.ibatis.mapper: WARN
+      org.mybatis: WARN
+      com.gargoylesoftware: ERROR
+      com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
+      com.zaxxer: WARN
+      feign: DEBUG
+
+bricklink:
+   consumer:
+      key:
+      secret:
+   token:
+      value:
+      secret:
+
+lego:
+   sheet:
+      dataStoreDir: c:/users/tvatt/.credentials/sheets.googleapis.com-java-quickstart
+      clientSecretDir: /client_secret.json
+      id:
+      workbook: By BOX
+      #workbook: By BOX, by NUMBER
+      range: A2:F
+
+mybatis:
+   type-aliases-package: com.vattima.lego.data.ibatis.type.aliases
+   type-handlers-package: com.vattima.lego.data.ibatis.type.handler
+   configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 1000
+      default-statement-timeout: 30
+      lazy-loading-enabled: true
+   mapper-locations: com/vattima/lego/data/ibatis/*
+
+debug: false
+
+
