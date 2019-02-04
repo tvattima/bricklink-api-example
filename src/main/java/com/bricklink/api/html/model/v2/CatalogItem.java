@@ -1,10 +1,10 @@
 package com.bricklink.api.html.model.v2;
 
-import com.vattima.lego.data.dto.Item;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.bricklink.data.lego.dto.Item;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;

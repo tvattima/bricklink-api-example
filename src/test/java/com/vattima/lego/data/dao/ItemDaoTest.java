@@ -1,6 +1,7 @@
 package com.vattima.lego.data.dao;
 
-import com.vattima.lego.data.dto.Item;
+import net.bricklink.data.lego.dao.ItemDao;
+import net.bricklink.data.lego.dto.Item;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -4,9 +4,9 @@ spring:
    application:
      name: Lego Bricklink Inventory
    datasource:
-      url:
-      username:
-      password:
+      url: jdbc:mysql://shared50.accountservergroup.com:3306/a925261_dev_lego
+      username: a925261_legomgr
+      password: N1njago1
       driver-class-name: com.mysql.jdbc.Driver
       hikari:
          connection-timeout: 60000
@@ -23,17 +23,17 @@ logging:
 
 bricklink:
    consumer:
-      key:
-      secret:
+      key: 9A62098F9A314327B0B8A28FFEF6A0EB
+      secret: 72370639EE9D468CA3E8777E005BB320
    token:
-      value:
-      secret:
+      value: 07603FB14C474E2993BBF5AE4199C323
+      secret: 6ED6C6275151480DA3541708FE5A5D59
 
 lego:
    sheet:
       dataStoreDir: c:/users/tvatt/.credentials/sheets.googleapis.com-java-quickstart
       clientSecretDir: /client_secret.json
-      id:
+      id: 1KegFWxww3v6qWn6lfg8PWb-X8Ipc8Y3Asq7l6subgq4
       workbook: By BOX
       #workbook: By BOX, by NUMBER
       range: A2:F
@@ -49,5 +49,3 @@ mybatis:
    mapper-locations: com/vattima/lego/data/ibatis/*
 
 debug: false
-
-

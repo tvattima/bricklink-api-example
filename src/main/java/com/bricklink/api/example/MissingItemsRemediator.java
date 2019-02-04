@@ -6,13 +6,6 @@ import com.bricklink.api.ajax.model.v1.Type;
 import com.bricklink.api.ajax.support.SearchProductResult;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.model.v1.BricklinkResource;
-import com.vattima.lego.data.dao.InventoryIndexDao;
-import com.vattima.lego.data.dao.ItemDao;
-import com.vattima.lego.data.dao.TransactionDao;
-import com.vattima.lego.data.dto.BricklinkItem;
-import com.vattima.lego.data.dto.InventoryIndex;
-import com.vattima.lego.data.dto.Transaction;
-import com.vattima.lego.data.dto.TransactionItem;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
@@ -23,6 +16,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import net.bricklink.data.lego.dao.InventoryIndexDao;
+import net.bricklink.data.lego.dao.ItemDao;
+import net.bricklink.data.lego.dao.TransactionDao;
+import net.bricklink.data.lego.dto.BricklinkItem;
+import net.bricklink.data.lego.dto.InventoryIndex;
+import net.bricklink.data.lego.dto.Transaction;
+import net.bricklink.data.lego.dto.TransactionItem;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -101,12 +101,12 @@ public class MissingItemsRemediator {
 
                         //    Attempt first to find the item; if not found, insert it.
                         String searchItemNumber = getSearchItemNumber(inventoryIndex.getItemNumber());
-                        com.vattima.lego.data.dto.Item item = itemDao.findItemByNumber(searchItemNumber);
+                        net.bricklink.data.lego.dto.Item item = itemDao.findItemByNumber(searchItemNumber);
                         if (null == item) {
                             shouldInsertItem = true;
                             log.info("\t\t\tItem Number not found in DB [{}]", inventoryIndex.getItemNumber());
                             //    Construct Item from Bricklink data
-                            item = new com.vattima.lego.data.dto.Item();
+                            item = new net.bricklink.data.lego.dto.Item();
                             item.setItemNumber(searchItemNumber);
                             item.setItemName(set.getStrItemName());
                             item.setItemTypeCode("S");
@@ -196,7 +196,7 @@ public class MissingItemsRemediator {
 
                 //    For each Item in the List of that key
                 for (ItemInventoryIndexHolder itemInventoryIndexHolder: itemsByYearMap.get(year)) {
-                    com.vattima.lego.data.dto.Item item = itemInventoryIndexHolder.getItem();
+                    net.bricklink.data.lego.dto.Item item = itemInventoryIndexHolder.getItem();
                     InventoryIndex inventoryIndex = itemInventoryIndexHolder.getInventoryIndex();
                     log.info("\t\t ---> Item [{}]", item);
                     // Based on the quantity in the inventory index and the sealed indicator, build the TransactionItems
@@ -242,7 +242,7 @@ public class MissingItemsRemediator {
         @Setter
         @EqualsAndHashCode
         private class ItemInventoryIndexHolder {
-            private final com.vattima.lego.data.dto.Item item;
+            private final net.bricklink.data.lego.dto.Item item;
             private final InventoryIndex inventoryIndex;
         }
     }

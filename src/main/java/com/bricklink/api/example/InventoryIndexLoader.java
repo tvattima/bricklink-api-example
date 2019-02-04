@@ -1,7 +1,5 @@
 package com.bricklink.api.example;
 
-import com.vattima.lego.data.dao.InventoryIndexDao;
-import com.vattima.lego.data.dto.InventoryIndex;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
 import com.vattima.lego.sheet.meta.BooleanCellDescriptor;
 import com.vattima.lego.sheet.meta.CellDescriptor;
@@ -9,6 +7,8 @@ import com.vattima.lego.sheet.meta.IntegerCellDescriptor;
 import com.vattima.lego.sheet.meta.StringCellDescriptor;
 import com.vattima.lego.sheet.model.LegoSheetItem;
 import com.vattima.lego.sheet.service.LegoItemSheetService;
+import net.bricklink.data.lego.dao.InventoryIndexDao;
+import net.bricklink.data.lego.dto.InventoryIndex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"com.bricklink", "com.vattima"})
+@SpringBootApplication(scanBasePackages = {"net.bricklink", "com.bricklink", "com.vattima"})
 @EnableConfigurationProperties
 public class InventoryPriceCrawler {
     public static void main(String[] args) {

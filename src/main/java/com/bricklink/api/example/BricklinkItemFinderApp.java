@@ -2,17 +2,16 @@ package com.bricklink.api.example;
 
 import com.bricklink.api.html.BricklinkHtmlClient;
 import com.bricklink.api.html.model.v2.CatalogItem;
-import com.vattima.lego.data.dao.InventoryIndexDao;
-import com.vattima.lego.data.dao.ItemDao;
-import com.vattima.lego.data.dto.BricklinkItem;
-import com.vattima.lego.data.dto.Item;
 import lombok.extern.slf4j.Slf4j;
+import net.bricklink.data.lego.dao.InventoryIndexDao;
+import net.bricklink.data.lego.dao.ItemDao;
+import net.bricklink.data.lego.dto.BricklinkItem;
+import net.bricklink.data.lego.dto.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.NumberFormat;
