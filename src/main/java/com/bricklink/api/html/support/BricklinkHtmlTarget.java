@@ -21,7 +21,7 @@ public class BricklinkHtmlTarget<T> implements Target<T> {
 
     @Override
     public String name() {
-        return "Bricklink HTML v1";
+        return "Bricklink HTML com.bricklink.api.ajax.model.v1";
     }
 
     @Override
