@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootApplication(scanBasePackages = {"com"})
+@SpringBootApplication(scanBasePackages = {"net.bricklink", "com.bricklink", "com.vattima"})
 @EnableConfigurationProperties
 public class BricklinkTestMain {
     private static Logger logger = LoggerFactory.getLogger(BricklinkTestMain.class);
@@ -67,7 +67,7 @@ public class BricklinkTestMain {
         }
     }
 
-    @Component
+    //@Component
     public static class BricklinkFeignTest implements CommandLineRunner {
         @Autowired
         private BricklinkRestClient bricklinkRestClient;
