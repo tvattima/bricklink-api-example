@@ -99,7 +99,7 @@ public class BricklinkItemFinderApp {
     public Item upsertBricklinkItem(BricklinkHtmlClient bricklinkHtmlClient, Item item) {
         List<CatalogItem> catalogItems = getBricklinkItems(bricklinkHtmlClient, item);
         for (CatalogItem catalogItem : catalogItems) {
-            double matchPercentage = catalogItem.itemNameMatch(item);
+            double matchPercentage = catalogItem.itemNameMatch(item.getItemName());
             //if ((catalogItems.size() == 1) && (matchPercentage >= 0.5d && matchPercentage < 1.0d)) {
             if (matchPercentage == 1.0d) {
                 BricklinkItem bricklinkItem = new BricklinkItem();
@@ -132,7 +132,7 @@ public class BricklinkItemFinderApp {
                     } else {
                         found = true;
                         catalogItems.add(catalogItem);
-                        double matchPercentage = catalogItem.itemNameMatch(item);
+                        double matchPercentage = catalogItem.itemNameMatch(item.getItemName());
                         log.info("(B)------- itemId [{}], itemNumber [{}], itemName [{}], Bricklink Item Id [{}], Bricklink Item No [{}] Bricklink Item Name [{}], match % [{}]{}", item.getItemId(), item.getItemNumber(), item.getItemName(), catalogItem.getItemId(), catalogItem.getItemNo(), catalogItem.getItemName(), numberFormat.format(matchPercentage), (matchPercentage < 1) ? "**" : "");
                         if (!item.getItemTypeCode()
                                  .equals("S")) {

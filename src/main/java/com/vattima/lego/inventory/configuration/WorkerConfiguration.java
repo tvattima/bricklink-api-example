@@ -11,10 +11,12 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dto.BricklinkInventoryWork;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -57,14 +59,19 @@ public class WorkerConfiguration {
                     )
                     .forEach(iwh -> {
                         PriceGuide pg = iwh.getPriceGuide();
-                        log.info("[#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
+                        log.info("[{}::#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
+                                iwh.getBricklinkInventoryWork().getBlItemId(),
                                 pg.getItem().getNo(),
                                 iwh.getGuideType(),
                                 pg.getNew_or_used(),
                                 pg.getMin_price(),
                                 pg.getAvg_price(),
                                 pg.getMax_price());
-                        iwh.getItemsForSale().forEach(ifs -> log.info("\t\t{}", ifs));
+                        iwh.getItemsForSale().forEach(ifs -> log.info("\t\tBricklinkSaleItem(blSaleItemId={}, blItemId={}, inventoryId={}, quantity={}, newOrUsed={}, completeness={}, unitPrice={}, description={}, hasExtendedDescription={}, dateCreated={})",
+                                "0", iwh.getBricklinkInventoryWork().getBlItemId(), ifs.getIdInv(), ifs.getN4Qty(), ifs.getCodeNew(), ifs.getCodeComplete(), ifs.getSalePrice(), StringUtils.trim(ifs.getStrDesc()), ifs.getHasExtendedDescription(), Instant.now()));
+
+
+
                     });
         };
     }
