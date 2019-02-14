@@ -10,25 +10,31 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
-import net.bricklink.data.lego.dto.BricklinkInventoryWork;
+import net.bricklink.data.lego.dao.BricklinkSaleItemDao;
+import net.bricklink.data.lego.dto.BricklinkInventory;
+import net.bricklink.data.lego.dto.BricklinkSaleItem;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 @Configuration
 @Slf4j
 public class WorkerConfiguration {
+    private static final Integer ONE = 1;
+
     @Bean
-    CommandLineRunner inventoryCrawler(BricklinkInventoryDao bricklinkInventoryDao, BricklinkRestClient bricklinkRestClient, BricklinkAjaxClient bricklinkAjaxClient) {
+    CommandLineRunner inventoryCrawler(BricklinkInventoryDao bricklinkInventoryDao, BricklinkRestClient bricklinkRestClient, BricklinkAjaxClient bricklinkAjaxClient, BricklinkSaleItemDao bricklinkSaleItemDao) {
         return args -> {
             bricklinkInventoryDao.getInventoryWork()
                                  .stream()
-                                 .limit(5)
                                  .map(biw -> Stream.of(
                                          new InventoryWorkHolder(biw.getItemType(), "stock", biw.getNewOrUsed(), biw),
                                          new InventoryWorkHolder(biw.getItemType(), "sold", biw.getNewOrUsed(), biw)
@@ -39,14 +45,14 @@ public class WorkerConfiguration {
                                                            .equals("stock")) {
                                                         CatalogItemsForSaleResult catalogItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(
                                                                 new ParamsBuilder()
-                                                                        .of("itemid", iwh.getBricklinkInventoryWork()
+                                                                        .of("itemid", iwh.getBricklinkInventory()
                                                                                          .getBlItemId())
                                                                         .of("cond", iwh.getNewUsed())
                                                                         .get());
                                                         iwh.setItemsForSale(catalogItemsForSaleResult.getList());
                                                     }
                                                     PriceGuide pg = bricklinkRestClient.getPriceGuide(iwh.getType(),
-                                                            iwh.getBricklinkInventoryWork()
+                                                            iwh.getBricklinkInventory()
                                                                .getBlItemNo(),
                                                             new ParamsBuilder()
                                                                     .of("type", iwh.getType())
@@ -56,23 +62,37 @@ public class WorkerConfiguration {
                                                                                        .getData();
                                                     iwh.setPriceGuide(pg);
                                                 })
-                    )
-                    .forEach(iwh -> {
-                        PriceGuide pg = iwh.getPriceGuide();
-                        log.info("[{}::#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
-                                iwh.getBricklinkInventoryWork().getBlItemId(),
-                                pg.getItem().getNo(),
-                                iwh.getGuideType(),
-                                pg.getNew_or_used(),
-                                pg.getMin_price(),
-                                pg.getAvg_price(),
-                                pg.getMax_price());
-                        iwh.getItemsForSale().forEach(ifs -> log.info("\t\tBricklinkSaleItem(blSaleItemId={}, blItemId={}, inventoryId={}, quantity={}, newOrUsed={}, completeness={}, unitPrice={}, description={}, hasExtendedDescription={}, dateCreated={})",
-                                "0", iwh.getBricklinkInventoryWork().getBlItemId(), ifs.getIdInv(), ifs.getN4Qty(), ifs.getCodeNew(), ifs.getCodeComplete(), ifs.getSalePrice(), StringUtils.trim(ifs.getStrDesc()), ifs.getHasExtendedDescription(), Instant.now()));
-
-
-
-                    });
+                                 )
+                                 .forEach(iwh -> {
+                                     PriceGuide pg = iwh.getPriceGuide();
+                                     log.info("[{}::#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
+                                             iwh.getBricklinkInventory()
+                                                .getBlItemId(),
+                                             pg.getItem()
+                                               .getNo(),
+                                             iwh.getGuideType(),
+                                             pg.getNew_or_used(),
+                                             pg.getMin_price(),
+                                             pg.getAvg_price(),
+                                             pg.getMax_price());
+                                     iwh.getItemsForSale()
+                                        .forEach(ifs -> {
+                                            log.info("\t\tBricklinkSaleItem(blSaleItemId={}, blItemId={}, inventoryId={}, quantity={}, newOrUsed={}, completeness={}, unitPrice={}, description={}, hasExtendedDescription={}, dateCreated={})",
+                                                    "0", iwh.getBricklinkInventory()
+                                                            .getBlItemId(), ifs.getIdInv(), ifs.getN4Qty(), ifs.getCodeNew(), ifs.getCodeComplete(), ifs.getSalePrice(), StringUtils.trim(ifs.getStrDesc()), ifs.getHasExtendedDescription(), Instant.now());
+                                            BricklinkSaleItem bricklinkSaleItem = new BricklinkSaleItem();
+                                            bricklinkSaleItem.setBlItemId(iwh.getBricklinkInventory().getBlItemId());
+                                            bricklinkSaleItem.setInventoryId(ifs.getIdInv());
+                                            bricklinkSaleItem.setCompleteness(ifs.getCodeComplete());
+                                            bricklinkSaleItem.setDateCreated(Instant.now());
+                                            bricklinkSaleItem.setDescription(StringUtils.trim(ifs.getStrDesc()));
+                                            bricklinkSaleItem.setHasExtendedDescription(ONE.equals(ifs.getHasExtendedDescription()));
+                                            bricklinkSaleItem.setNewOrUsed(ifs.getCodeNew());
+                                            bricklinkSaleItem.setQuantity(ifs.getN4Qty());
+                                            bricklinkSaleItem.setUnitPrice(ifs.getSalePrice());
+                                            bricklinkSaleItemDao.insert(bricklinkSaleItem);
+                                        });
+                                 });
         };
     }
 
@@ -83,7 +103,7 @@ public class WorkerConfiguration {
         private final String type;
         private final String guideType;
         private final String newUsed;
-        private final BricklinkInventoryWork bricklinkInventoryWork;
+        private final BricklinkInventory bricklinkInventory;
         private PriceGuide priceGuide = new PriceGuide();
         private List<ItemForSale> itemsForSale = new ArrayList<>();
     }

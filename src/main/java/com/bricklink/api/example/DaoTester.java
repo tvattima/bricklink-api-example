@@ -6,7 +6,7 @@ import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dao.InventoryIndexDao;
 import net.bricklink.data.lego.dao.ItemDao;
 import net.bricklink.data.lego.dao.TransactionDao;
-import net.bricklink.data.lego.dto.BricklinkInventoryWork;
+import net.bricklink.data.lego.dto.BricklinkInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -65,9 +65,9 @@ public class DaoTester {
 //            inventoryIndex.setDescription("ZZZZZZ Is this Bricklink 8533-1 - Gali OR 8533-2 - Gali - With mini CD-ROM?");
 //            inventoryIndexDao.udpateInventoryIndex(inventoryIndex);
 
-            List<BricklinkInventoryWork> bricklinkInventoryWorkList = bricklinkInventoryDao.getAllInventoryWork();
-            for (BricklinkInventoryWork bricklinkInventoryWork : bricklinkInventoryWorkList) {
-                log.info("{}", bricklinkInventoryWork);
+            List<BricklinkInventory> bricklinkInventoryList = bricklinkInventoryDao.getAllInventoryWork();
+            for (BricklinkInventory bricklinkInventory : bricklinkInventoryList) {
+                log.info("{}", bricklinkInventory);
             }
 
         }
