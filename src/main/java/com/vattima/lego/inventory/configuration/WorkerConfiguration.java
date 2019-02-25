@@ -8,6 +8,7 @@ import com.bricklink.api.rest.model.v1.PriceGuide;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dao.BricklinkSaleItemDao;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Configuration
@@ -33,23 +35,31 @@ public class WorkerConfiguration {
     @Bean
     CommandLineRunner inventoryCrawler(BricklinkInventoryDao bricklinkInventoryDao, BricklinkRestClient bricklinkRestClient, BricklinkAjaxClient bricklinkAjaxClient, BricklinkSaleItemDao bricklinkSaleItemDao) {
         return args -> {
-            bricklinkInventoryDao.getInventoryWork()
+            List<InventoryWorkHolder> inventoryWorkHolderList = bricklinkInventoryDao.getInventoryWork()
                                  .stream()
-                                 .map(biw -> Stream.of(
-                                         new InventoryWorkHolder(biw.getItemType(), "stock", biw.getNewOrUsed(), biw),
-                                         new InventoryWorkHolder(biw.getItemType(), "sold", biw.getNewOrUsed(), biw)
+                                 .filter(BricklinkInventory::shouldSynchronize)
+                                 .filter(bi -> bi.getBlItemNo().equals("4559-1"))
+                                 .map(iwh -> Stream.of(
+                                         new InventoryWorkHolder(iwh.getItemType(), "stock", iwh.getNewOrUsed(), iwh),
+                                         new InventoryWorkHolder(iwh.getItemType(), "sold", iwh.getNewOrUsed(), iwh)
                                  ))
                                  .flatMap(s -> s.parallel()
                                                 .peek(iwh -> {
-                                                    if (iwh.getGuideType()
-                                                           .equals("stock")) {
+                                                    if (iwh.getGuideType().equals("stock")) {
                                                         CatalogItemsForSaleResult catalogItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(
                                                                 new ParamsBuilder()
-                                                                        .of("itemid", iwh.getBricklinkInventory()
-                                                                                         .getBlItemId())
+                                                                        .of("itemid", iwh
+                                                                                .getBricklinkInventory()
+                                                                                .getBlItemId())
                                                                         .of("cond", iwh.getNewUsed())
                                                                         .get());
                                                         iwh.setItemsForSale(catalogItemsForSaleResult.getList());
+                                                        iwh.getItemsForSale()
+                                                           .forEach(ifs -> {
+                                                               BricklinkSaleItem bricklinkSaleItem = iwh.buildBricklinkSaleItem(ifs);
+                                                               bricklinkSaleItemDao.upsert(bricklinkSaleItem);
+                                                               log.info("{}", bricklinkSaleItem);
+                                                           });
                                                     }
                                                     PriceGuide pg = bricklinkRestClient.getPriceGuide(iwh.getType(),
                                                             iwh.getBricklinkInventory()
@@ -58,12 +68,11 @@ public class WorkerConfiguration {
                                                                     .of("type", iwh.getType())
                                                                     .of("guide_type", iwh.getGuideType())
                                                                     .of("new_or_used", iwh.getNewUsed())
-                                                                    .get())
-                                                                                       .getData();
+                                                                    .get()).getData();
                                                     iwh.setPriceGuide(pg);
                                                 })
                                  )
-                                 .forEach(iwh -> {
+                                 .peek(iwh -> {
                                      PriceGuide pg = iwh.getPriceGuide();
                                      log.info("[{}::#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
                                              iwh.getBricklinkInventory()
@@ -75,30 +84,15 @@ public class WorkerConfiguration {
                                              pg.getMin_price(),
                                              pg.getAvg_price(),
                                              pg.getMax_price());
-                                     iwh.getItemsForSale()
-                                        .forEach(ifs -> {
-                                            log.info("\t\tBricklinkSaleItem(blSaleItemId={}, blItemId={}, inventoryId={}, quantity={}, newOrUsed={}, completeness={}, unitPrice={}, description={}, hasExtendedDescription={}, dateCreated={})",
-                                                    "0", iwh.getBricklinkInventory()
-                                                            .getBlItemId(), ifs.getIdInv(), ifs.getN4Qty(), ifs.getCodeNew(), ifs.getCodeComplete(), ifs.getSalePrice(), StringUtils.trim(ifs.getStrDesc()), ifs.getHasExtendedDescription(), Instant.now());
-                                            BricklinkSaleItem bricklinkSaleItem = new BricklinkSaleItem();
-                                            bricklinkSaleItem.setBlItemId(iwh.getBricklinkInventory().getBlItemId());
-                                            bricklinkSaleItem.setInventoryId(ifs.getIdInv());
-                                            bricklinkSaleItem.setCompleteness(ifs.getCodeComplete());
-                                            bricklinkSaleItem.setDateCreated(Instant.now());
-                                            bricklinkSaleItem.setDescription(StringUtils.trim(ifs.getStrDesc()));
-                                            bricklinkSaleItem.setHasExtendedDescription(ONE.equals(ifs.getHasExtendedDescription()));
-                                            bricklinkSaleItem.setNewOrUsed(ifs.getCodeNew());
-                                            bricklinkSaleItem.setQuantity(ifs.getN4Qty());
-                                            bricklinkSaleItem.setUnitPrice(ifs.getSalePrice());
-                                            bricklinkSaleItemDao.insert(bricklinkSaleItem);
-                                        });
-                                 });
+                                 }).collect(Collectors.toList());
+            inventoryWorkHolderList.parallelStream().peek(iwh -> log.info("{}", iwh)).collect(Collectors.toList());
         };
     }
 
     @Setter
     @Getter
     @RequiredArgsConstructor
+    @ToString
     private class InventoryWorkHolder {
         private final String type;
         private final String guideType;
@@ -106,6 +100,20 @@ public class WorkerConfiguration {
         private final BricklinkInventory bricklinkInventory;
         private PriceGuide priceGuide = new PriceGuide();
         private List<ItemForSale> itemsForSale = new ArrayList<>();
+        
+        BricklinkSaleItem buildBricklinkSaleItem(ItemForSale itemForSale) {
+            BricklinkSaleItem bricklinkSaleItem = new BricklinkSaleItem();
+            bricklinkSaleItem.setBlItemId(getBricklinkInventory().getBlItemId());
+            bricklinkSaleItem.setInventoryId(itemForSale.getIdInv());
+            bricklinkSaleItem.setCompleteness(itemForSale.getCodeComplete());
+            bricklinkSaleItem.setDateCreated(Instant.now());
+            bricklinkSaleItem.setDescription(StringUtils.trim(itemForSale.getStrDesc()));
+            bricklinkSaleItem.setHasExtendedDescription(ONE.equals(itemForSale.getHasExtendedDescription()));
+            bricklinkSaleItem.setNewOrUsed(itemForSale.getCodeNew());
+            bricklinkSaleItem.setQuantity(itemForSale.getN4Qty());
+            bricklinkSaleItem.setUnitPrice(itemForSale.getSalePrice());            
+            return bricklinkSaleItem;
+        }
     }
 
     private static class ParamsBuilder {

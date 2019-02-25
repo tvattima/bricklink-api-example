@@ -65,7 +65,7 @@ public class DaoTester {
 //            inventoryIndex.setDescription("ZZZZZZ Is this Bricklink 8533-1 - Gali OR 8533-2 - Gali - With mini CD-ROM?");
 //            inventoryIndexDao.udpateInventoryIndex(inventoryIndex);
 
-            List<BricklinkInventory> bricklinkInventoryList = bricklinkInventoryDao.getAllInventoryWork();
+            List<BricklinkInventory> bricklinkInventoryList = bricklinkInventoryDao.getAll();
             for (BricklinkInventory bricklinkInventory : bricklinkInventoryList) {
                 log.info("{}", bricklinkInventory);
             }

@@ -99,7 +99,7 @@ public class MissingItemsRemediator {
                         log.info("\t\tBricklink Set [{}]", set);
                         boolean shouldInsertItem = false;
 
-                        //    Attempt first to find the item; if not found, insert it.
+                        //    Attempt first to find the item; if not found, upsert it.
                         String searchItemNumber = getSearchItemNumber(inventoryIndex.getItemNumber());
                         net.bricklink.data.lego.dto.Item item = itemDao.findItemByNumber(searchItemNumber);
                         if (null == item) {
