@@ -67,7 +67,7 @@ public class BricklinkTestMain {
         }
     }
 
-    //@Component
+    @Component
     public static class BricklinkFeignTest implements CommandLineRunner {
         @Autowired
         private BricklinkRestClient bricklinkRestClient;
@@ -147,15 +147,15 @@ public class BricklinkTestMain {
 //
 //            Inventory updateInventory = newInventory.getData();
 
-            BricklinkResource<Inventory> inventory2 = bricklinkRestClient.getInventories(79013424L);
-            if (inventory2.getMeta().getCode().equals(404)) {
-                logger.warn("Not found [{}]", 79013424L);
-            }
-            System.out.println("---------------------------------------------------------------------------------------------");
-            System.out.println("Inventory ["+inventory2+"]");
-            System.out.println("---------------------------------------------------------------------------------------------");
+//            BricklinkResource<Inventory> inventory2 = bricklinkRestClient.getInventories(165302802L);
+//            if (inventory2.getMeta().getCode().equals(404)) {
+//                logger.warn("Not found [{}]", 165302802L);
+//            }
+//            System.out.println("---------------------------------------------------------------------------------------------");
+//            System.out.println("Inventory ["+inventory2+"]");
+//            System.out.println("---------------------------------------------------------------------------------------------");
 
-// Update Inventory example
+//            // Update Inventory example
 //            inventory = new Inventory();
 //            inventory.setInventory_id(162625963L);
 //            inventory.setRemarks("These are my updated remarks!");

@@ -13,13 +13,14 @@ spring:
 
 logging:
    level:
-      root: INFO
-      com.vattima.lego.data.ibatis.mapper: WARN
-      org.mybatis: WARN
+      root: DEBUG
+      com.vattima.lego.data.ibatis.mapper: INFO
+      org.mybatis: INFO
       com.gargoylesoftware: ERROR
       com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
-      com.zaxxer: WARN
-      feign: DEBUG
+      com.zaxxer: INFO
+      feign: WARN
+      com.fasterxml: DEBUG
 
 bricklink:
    consumer:
@@ -37,15 +38,5 @@ lego:
       workbook: By BOX
       #workbook: By BOX, by NUMBER
       range: A2:F
-
-mybatis:
-   type-aliases-package: com.vattima.lego.data.ibatis.type.aliases
-   type-handlers-package: com.vattima.lego.data.ibatis.type.handler
-   configuration:
-      map-underscore-to-camel-case: true
-      default-fetch-size: 1000
-      default-statement-timeout: 30
-      lazy-loading-enabled: true
-   mapper-locations: com/vattima/lego/data/ibatis/*
 
 debug: false
