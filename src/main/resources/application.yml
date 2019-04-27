@@ -4,12 +4,24 @@ spring:
    application:
      name: Lego Bricklink Inventory
    datasource:
-      url: jdbc:mysql://shared50.accountservergroup.com:3306/a925261_dev_lego
-      username: a925261_legomgr
-      password: N1njago1
-      driver-class-name: com.mysql.jdbc.Driver
+      client-config-dir: C:\Users\tvatt\.credentials\site5\database
+      client-config-file: site5-database-configuration.json
+      database-key-name: site5-lego-dev
       hikari:
-         connection-timeout: 60000
+         connection-timeout: 10000
+         idle-timeout: 30000
+         connection-test-query: SELECT 1
+         initialization-fail-timeout: 10000
+         auto-commit: false
+         login-timeout: 10000
+         minimum-idle: 5
+         maximum-pool-size: 25
+         validation-timeout: 10000
+         pool-name: site5-mysql-jdbc-pool
+
+bricklink:
+   client-config-dir: C:\Users\tvatt\.credentials\bricklink
+   client-config-file: bricklink-client-api-keys.json
 
 logging:
    level:
@@ -18,17 +30,9 @@ logging:
       org.mybatis: INFO
       com.gargoylesoftware: ERROR
       com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
-      com.zaxxer: INFO
+      com.zaxxer: DEBUG
       feign: WARN
       com.fasterxml: DEBUG
-
-bricklink:
-   consumer:
-      key: 9A62098F9A314327B0B8A28FFEF6A0EB
-      secret: 72370639EE9D468CA3E8777E005BB320
-   token:
-      value: 07603FB14C474E2993BBF5AE4199C323
-      secret: 6ED6C6275151480DA3541708FE5A5D59
 
 lego:
    sheet:

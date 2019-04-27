@@ -5,6 +5,7 @@ import com.bricklink.api.ajax.model.v1.ItemForSale;
 import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
 import com.bricklink.api.ajax.support.SearchProductResult;
 import com.bricklink.api.rest.client.BricklinkRestClient;
+import com.bricklink.api.rest.configuration.BricklinkRestProperties;
 import com.bricklink.api.rest.model.v1.BricklinkResource;
 import com.bricklink.api.rest.model.v1.Inventory;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
@@ -19,6 +20,7 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
+import lombok.RequiredArgsConstructor;
 import net.bricklink.data.lego.dao.ItemDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,9 +70,10 @@ public class BricklinkTestMain {
     }
 
     @Component
+    @RequiredArgsConstructor
     public static class BricklinkFeignTest implements CommandLineRunner {
-        @Autowired
-        private BricklinkRestClient bricklinkRestClient;
+        private final BricklinkRestClient bricklinkRestClient;
+        private final BricklinkRestProperties bricklinkRestProperties;
 
         @Override
         public void run(String... strings) throws Exception {
