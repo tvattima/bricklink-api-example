@@ -20,10 +20,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,30 +32,39 @@ public class WorkerConfiguration {
     @Bean
     CommandLineRunner inventoryCrawler(BricklinkInventoryDao bricklinkInventoryDao, BricklinkRestClient bricklinkRestClient, BricklinkAjaxClient bricklinkAjaxClient, BricklinkSaleItemDao bricklinkSaleItemDao) {
         return args -> {
-            List<InventoryWorkHolder> inventoryWorkHolderList = bricklinkInventoryDao.getInventoryWork()
-                                 .stream()
-                                 .filter(BricklinkInventory::shouldSynchronize)
-                                 .filter(bi -> bi.getBlItemNo().equals("4559-1"))
-                                 .map(iwh -> Stream.of(
-                                         new InventoryWorkHolder(iwh.getItemType(), "stock", iwh.getNewOrUsed(), iwh),
-                                         new InventoryWorkHolder(iwh.getItemType(), "sold", iwh.getNewOrUsed(), iwh)
+            List<InventoryWorkHolder> inventoryWorkHolderList =
+                    bricklinkInventoryDao.getInventoryWork()
+                                         .parallelStream()
+                                         .filter(BricklinkInventory::shouldSynchronize)
+                                         .map(iwh -> Stream.of(
+                                                 new InventoryWorkHolder(iwh.getItemType(), "stock", "N", iwh),
+                                                 new InventoryWorkHolder(iwh.getItemType(), "sold", "N", iwh),
+                                                 new InventoryWorkHolder(iwh.getItemType(), "stock", "U", iwh),
+                                                 new InventoryWorkHolder(iwh.getItemType(), "sold", "U", iwh)
                                  ))
-                                 .flatMap(s -> s.parallel()
-                                                .peek(iwh -> {
+                                         .flatMap(s -> s.parallel()
+                                                        .peek(iwh -> {
                                                     if (iwh.getGuideType().equals("stock")) {
-                                                        CatalogItemsForSaleResult catalogItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(
+                                                        CatalogItemsForSaleResult catalogNewItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(
                                                                 new ParamsBuilder()
                                                                         .of("itemid", iwh
                                                                                 .getBricklinkInventory()
                                                                                 .getBlItemId())
                                                                         .of("cond", iwh.getNewUsed())
+                                                                        .of("rpp", 500)
                                                                         .get());
-                                                        iwh.setItemsForSale(catalogItemsForSaleResult.getList());
+                                                        iwh.setItemsForSale(catalogNewItemsForSaleResult.getList());
                                                         iwh.getItemsForSale()
                                                            .forEach(ifs -> {
                                                                BricklinkSaleItem bricklinkSaleItem = iwh.buildBricklinkSaleItem(ifs);
-                                                               bricklinkSaleItemDao.upsert(bricklinkSaleItem);
-                                                               log.info("{}", bricklinkSaleItem);
+                                                               Integer affectedRows = null;
+                                                               try {
+                                                                   affectedRows = bricklinkSaleItemDao.upsert(bricklinkSaleItem);
+                                                               } catch (Exception e) {
+                                                                   log.error("Could not upsert [{}]", bricklinkSaleItem);
+                                                                   e.printStackTrace();
+                                                               }
+                                                               log.debug("[{}] - {}", affectedRows, bricklinkSaleItem);
                                                            });
                                                     }
                                                     PriceGuide pg = bricklinkRestClient.getPriceGuide(iwh.getType(),
@@ -72,7 +78,7 @@ public class WorkerConfiguration {
                                                     iwh.setPriceGuide(pg);
                                                 })
                                  )
-                                 .peek(iwh -> {
+                                         .peek(iwh -> {
                                      PriceGuide pg = iwh.getPriceGuide();
                                      log.info("[{}::#{} Stock/Sold:{} New/Used: {} min:{} avg:{} max:{}]",
                                              iwh.getBricklinkInventory()
@@ -107,7 +113,7 @@ public class WorkerConfiguration {
             bricklinkSaleItem.setInventoryId(itemForSale.getIdInv());
             bricklinkSaleItem.setCompleteness(itemForSale.getCodeComplete());
             bricklinkSaleItem.setDateCreated(Instant.now());
-            bricklinkSaleItem.setDescription(StringUtils.trim(itemForSale.getStrDesc()));
+            bricklinkSaleItem.setDescription(StringUtils.trim(Optional.ofNullable(itemForSale.getStrDesc()).map(d -> d.replaceAll( "[^\\x00-\\x7F]", "" )).orElse("")));
             bricklinkSaleItem.setHasExtendedDescription(ONE.equals(itemForSale.getHasExtendedDescription()));
             bricklinkSaleItem.setNewOrUsed(itemForSale.getCodeNew());
             bricklinkSaleItem.setQuantity(itemForSale.getN4Qty());

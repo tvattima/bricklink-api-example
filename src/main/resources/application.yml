@@ -25,14 +25,16 @@ bricklink:
 
 logging:
    level:
-      root: DEBUG
-      com.vattima.lego.data.ibatis.mapper: INFO
-      org.mybatis: INFO
+      root: INFO
+      com.vattima.lego.data.ibatis.mapper: WARN
+      net.bricklink.data: WARN
+      org.springframework.jdbc: WARN
+      org.mybatis: WARN
       com.gargoylesoftware: ERROR
       com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
       com.zaxxer: DEBUG
-      feign: WARN
-      com.fasterxml: DEBUG
+      feign: DEBUG
+      sun: WARN
 
 lego:
    sheet:
