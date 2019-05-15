@@ -22,7 +22,7 @@ public class DaoTester {
         SpringApplication.run(BricklinkTestMain.class, args);
     }
 
-    @Component
+    //@Component
     @RequiredArgsConstructor
     public static class DaoRunner implements CommandLineRunner {
 
