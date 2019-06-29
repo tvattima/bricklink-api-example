@@ -6,8 +6,8 @@ import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
 import com.bricklink.api.ajax.support.SearchProductResult;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
-import com.bricklink.api.rest.model.v1.BricklinkResource;
 import com.bricklink.api.rest.model.v1.Inventory;
+import com.bricklink.web.support.BricklinkWebService;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
 import com.vattima.lego.sheet.meta.BooleanCellDescriptor;
 import com.vattima.lego.sheet.meta.CellDescriptor;
@@ -16,9 +16,9 @@ import com.vattima.lego.sheet.meta.StringCellDescriptor;
 import com.vattima.lego.sheet.model.LegoSheetItem;
 import com.vattima.lego.sheet.service.LegoItemSheetService;
 import feign.Feign;
+import feign.httpclient.ApacheHttpClient;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 import lombok.RequiredArgsConstructor;
 import net.bricklink.data.lego.dao.ItemDao;
@@ -69,11 +69,12 @@ public class BricklinkTestMain {
         }
     }
 
-    //@Component
+    @Component
     @RequiredArgsConstructor
     public static class BricklinkFeignTest implements CommandLineRunner {
         private final BricklinkRestClient bricklinkRestClient;
         private final BricklinkRestProperties bricklinkRestProperties;
+        private final BricklinkWebService bricklinkWebService;
 
         @Override
         public void run(String... strings) throws Exception {
@@ -173,10 +174,9 @@ public class BricklinkTestMain {
 //            System.out.println("Updated Inventory ["+updatedInventory+"]");
 //            System.out.println("---------------------------------------------------------------------------------------------");
 
-
             BricklinkAjaxClient bricklinkAjaxClient = Feign
                     .builder()
-                    .client(new OkHttpClient())
+                    .client(new ApacheHttpClient(bricklinkWebService.getHttpClient()))
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .logger(new Slf4jLogger(BricklinkAjaxClient.class))
