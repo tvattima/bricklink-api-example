@@ -1,12 +1,13 @@
 package com.bricklink.api.example;
 
 import com.bricklink.api.ajax.BricklinkAjaxClient;
+import com.bricklink.api.ajax.model.v1.Item;
 import com.bricklink.api.ajax.model.v1.ItemForSale;
 import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
 import com.bricklink.api.ajax.support.SearchProductResult;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
-import com.bricklink.api.rest.model.v1.Inventory;
+import com.bricklink.api.rest.model.v1.*;
 import com.bricklink.web.support.BricklinkWebService;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
 import com.vattima.lego.sheet.meta.BooleanCellDescriptor;
@@ -21,6 +22,7 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 import lombok.RequiredArgsConstructor;
+import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dao.ItemDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +33,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication(scanBasePackages = {"net.bricklink", "com.bricklink", "com.vattima"})
 @EnableConfigurationProperties
@@ -66,6 +65,42 @@ public class BricklinkTestMain {
                     new IntegerCellDescriptor(),
                     new StringCellDescriptor());
             List<LegoSheetItem> legoSheetItems = legoItemSheetService.getLegoItems(descriptors);
+        }
+    }
+
+    //@Component
+    @RequiredArgsConstructor
+    public static class InventoryQuantityFixer implements CommandLineRunner {
+        private final BricklinkRestClient bricklinkRestClient;
+        private final BricklinkRestProperties bricklinkRestProperties;
+        private final BricklinkWebService bricklinkWebService;
+        private final BricklinkInventoryDao bricklinkInventoryDao;
+
+        @Override
+        public void run(String... args) throws Exception {
+            logger.info("Bricklink Quantity Fixer");
+            bricklinkInventoryDao.getAllForSale()
+                                 .stream()
+//                                 .filter(bi -> bi.getInventoryId()
+//                                                 .equals(174931488L))
+                                 .forEach(bi -> {
+                                     Optional.of(bi.getInventoryId())
+                                             .ifPresent(ii -> {
+                                                 int inventoryQuantity = bi.getQuantity();
+
+                                                 BricklinkResource<Inventory> inventoryResponse = bricklinkRestClient.getInventories(ii);
+                                                 Inventory inventory = inventoryResponse.getData();
+                                                 int bricklinkQuantity = inventory.getQuantity();
+                                                 int delta = inventoryQuantity - bricklinkQuantity;
+                                                 if ((delta < 1) && (bricklinkQuantity != (bricklinkQuantity + delta))) {
+                                                     inventory.setQuantity(delta);
+                                                     inventory.setRemarks(bi.getUuid());
+                                                     inventory.setDate_created(null);
+                                                     bricklinkRestClient.updateInventory(ii, inventory);
+                                                     logger.info("Updated [{} : {}] from quantity [{}] to new quantity [{}]", bi.getBlItemNo(), bi.getUuid(), bricklinkQuantity, (bricklinkQuantity + delta));
+                                                 }
+                                             });
+                                 });
         }
     }
 
@@ -195,6 +230,32 @@ public class BricklinkTestMain {
             for (ItemForSale itemForSale : catalogItemsForSaleResult.getList()) {
                 logger.info("{}", itemForSale);
             }
+
+            BricklinkResource<List<Color>> colors = bricklinkRestClient.getColors();
+            logger.info("Metadata [{}]", colors.getMeta());
+            colors.getData().forEach(c -> {
+                if (c.getColor_name().equalsIgnoreCase("reddish brown")) {
+                    logger.info("-----------------------------------------------------------");
+                }
+                logger.info("Colors [{}]", c);
+            });
+
+            BricklinkResource<Color> color = bricklinkRestClient.getColor(12);
+            logger.info("Metadata [{}]", color.getMeta());
+            logger.info("Single Color [{}]", color.getData());
+
+            BricklinkResource<com.bricklink.api.rest.model.v1.Item> item = bricklinkRestClient.getCatalogItem("PART", "59230");
+            logger.info("Item [{}]", item);
+
+            BricklinkResource<List<Category>> categories = bricklinkRestClient.getCategories();
+            logger.info("Metadata [{}]", categories.getMeta());
+            categories.getData().forEach(c -> {
+                logger.info("Category [{}]", c);
+            });
+
+            BricklinkResource<List<ItemMapping>> itemMapping = bricklinkRestClient.getItemMapping("3666", 7);
+            logger.info("Metadata [{}]", itemMapping.getMeta());
+            logger.info("ItemMapping [{}]", itemMapping.getData());
         }
     }
 }
