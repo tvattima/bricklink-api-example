@@ -34,6 +34,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication(scanBasePackages = {"net.bricklink", "com.bricklink", "com.vattima"})
 @EnableConfigurationProperties
@@ -256,6 +257,25 @@ public class BricklinkTestMain {
             BricklinkResource<List<ItemMapping>> itemMapping = bricklinkRestClient.getItemMapping("3666", 7);
             logger.info("Metadata [{}]", itemMapping.getMeta());
             logger.info("ItemMapping [{}]", itemMapping.getData());
+
+            params.clear();
+            BricklinkResource<List<Order>> orders = bricklinkRestClient.getOrders(params);
+            orders.getData().forEach(o -> {
+                logger.info("Order [{}]", o);
+            });
+
+            String orderId = "11648048";
+            BricklinkResource<Order> order = bricklinkRestClient.getOrder(orderId);
+            logger.info("Order Id [{}] = [{}]", orderId, order.getData());
+
+            BricklinkResource<List<List<OrderItem>>> orderItemBatches = bricklinkRestClient.getOrderItems(orderId);
+            AtomicInteger i = new AtomicInteger();
+            orderItemBatches.getData().forEach(oib -> {
+                logger.info("\tBatch [{}] -------------------------------------------------------------------------------------------------", i.incrementAndGet());
+                oib.forEach(oi -> {
+                    logger.info("\t\tOrderItem [{}]", oi);
+                });
+            });
         }
     }
 }
