@@ -264,6 +264,15 @@ public class BricklinkTestMain {
                 logger.info("Order [{}]", o);
             });
 
+            String bogusOrderId = "10000008";
+            try {
+                BricklinkResource<Order> bricklinkOrder = bricklinkRestClient.getOrder(bogusOrderId);
+                Order order = Optional.ofNullable(bricklinkOrder.getData()).orElseThrow(() -> new Exception(String.format("Order Id [%1$s] was not found", bogusOrderId)));
+                logger.info("Order Id [{}] = [{}]", bogusOrderId, order);
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+
             String orderId = "11648048";
             BricklinkResource<Order> order = bricklinkRestClient.getOrder(orderId);
             logger.info("Order Id [{}] = [{}]", orderId, order.getData());
