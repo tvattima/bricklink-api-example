@@ -15,7 +15,7 @@ spring:
          auto-commit: false
          login-timeout: 10000
          minimum-idle: 5
-         maximum-pool-size: 25
+         maximum-pool-size: 5
          validation-timeout: 10000
          pool-name: site5-mysql-jdbc-pool
 
@@ -40,10 +40,11 @@ logging:
       org.mybatis: WARN
       com.gargoylesoftware: ERROR
       com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
-      com.zaxxer: DEBUG
-      org.apache: DEBUG
-      feign: DEBUG
+      com.zaxxer: WARN
+      org.apache: WARN
+      feign: WARN
       sun: WARN
+      okhttp3: WARN
 
 lego:
    sheet:

@@ -1,11 +1,11 @@
 package com.bricklink.api.example;
 
 import com.bricklink.api.ajax.BricklinkAjaxClient;
-import com.bricklink.api.ajax.model.v1.Item;
 import com.bricklink.api.ajax.model.v1.ItemForSale;
 import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
 import com.bricklink.api.ajax.support.SearchProductResult;
 import com.bricklink.api.rest.client.BricklinkRestClient;
+import com.bricklink.api.rest.client.ParamsBuilder;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
 import com.bricklink.api.rest.model.v1.*;
 import com.bricklink.web.support.BricklinkWebService;
@@ -22,6 +22,7 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dao.ItemDao;
 import org.slf4j.Logger;
@@ -35,6 +36,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication(scanBasePackages = {"net.bricklink", "com.bricklink", "com.vattima"})
 @EnableConfigurationProperties
@@ -105,7 +108,54 @@ public class BricklinkTestMain {
         }
     }
 
+
     @Component
+    @RequiredArgsConstructor
+    @Slf4j
+    public static class BricklinkSoldItemInventoryFixer implements CommandLineRunner {
+        private final BricklinkRestClient bricklinkRestClient;
+        private final BricklinkRestProperties bricklinkRestProperties;
+        private final BricklinkWebService bricklinkWebService;
+        private final BricklinkInventoryDao bricklinkInventoryDao;
+
+        @Override
+        public void run(String... args) throws Exception {
+            logger.info("Bricklink Sold Item Inventory Fixer");
+
+            // Get all incoming Completed orders' items
+            BricklinkResource<List<Order>> ordersResource = bricklinkRestClient.getOrders(new ParamsBuilder().of("direction", "in")
+                                                                                                             .of("filed", "true")
+                                                                                                             .get(), Arrays.asList("Completed"));
+            List<Order> orders = ordersResource.getData();
+            orders.stream()
+                  .map(o -> bricklinkRestClient.getOrderItems(o.getOrder_id()))
+                  .map(BricklinkResource::getData)
+                  .map(Collection::stream)
+                  .flatMap(s -> s.flatMap(List::stream))
+                  .filter(oi -> oi.getItem()
+                                  .getType()
+                                  .equals("SET"))
+                  .map(oi -> {
+                      Inventory bi = null;
+                      try {
+                          bi = bricklinkRestClient.getInventories(oi.getInventory_id())
+                                                  .getData();
+                      } catch (Exception e) {
+                          bi = new Inventory();
+                          bi.setInventory_id(oi.getInventory_id());
+                          bi.setIs_stock_room(true);
+                      }
+                      return bi;
+                  })
+                  .filter(bi -> !bi.getIs_stock_room())
+                  .collect(Collectors.toList())
+                  .forEach(bi -> {
+                      log.info("THIS INVENTORY SHOULD BE SET TO STOCKROOM! --> {}", bi);
+                  });
+        }
+    }
+
+    //@Component
     @RequiredArgsConstructor
     public static class BricklinkFeignTest implements CommandLineRunner {
         private final BricklinkRestClient bricklinkRestClient;
@@ -259,10 +309,21 @@ public class BricklinkTestMain {
             logger.info("ItemMapping [{}]", itemMapping.getData());
 
             params.clear();
-            BricklinkResource<List<Order>> orders = bricklinkRestClient.getOrders(params);
-            orders.getData().forEach(o -> {
-                logger.info("Order [{}]", o);
-            });
+            params.put("direction", "in");
+            params.put("filed", "false");
+            BricklinkResource<List<Order>> currentOrders = bricklinkRestClient.getOrders(params);
+            params.clear();
+            params.put("direction", "in");
+            params.put("filed", "true");
+            BricklinkResource<List<Order>> filedOrders = bricklinkRestClient.getOrders(params);
+            Stream.concat(currentOrders.getData()
+                                       .stream(), filedOrders.getData()
+                                                             .stream())
+                  .filter(o -> o.getDate_ordered()
+                                .getYear() == 2019)
+                  .forEach(o -> {
+                      logger.info("Order [{}]", o);
+                  });
 
             String bogusOrderId = "10000008";
             try {
