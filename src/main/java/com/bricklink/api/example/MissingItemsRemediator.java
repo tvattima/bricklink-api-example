@@ -131,8 +131,8 @@ public class MissingItemsRemediator {
                         //    Construct BricklinkItem
                         BricklinkItem bricklinkItem = new BricklinkItem();
                         bricklinkItem.setItemId(item.getItemId());
-                        bricklinkItem.setBricklinkItemNo(set.getStrItemNo());
-                        bricklinkItem.setBricklinkItemId(set.getIdItem());
+                        bricklinkItem.setBlItemNumber(set.getStrItemNo());
+                        bricklinkItem.setBlItemId(set.getIdItem());
 
                         //    Insert new BricklinkItem object
                         itemDao.insertBricklinkItem(bricklinkItem);

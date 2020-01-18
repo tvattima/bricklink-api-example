@@ -109,7 +109,7 @@ public class BricklinkTestMain {
     }
 
 
-    @Component
+    //@Component
     @RequiredArgsConstructor
     @Slf4j
     public static class BricklinkSoldItemInventoryFixer implements CommandLineRunner {
@@ -155,7 +155,7 @@ public class BricklinkTestMain {
         }
     }
 
-    //@Component
+    @Component
     @RequiredArgsConstructor
     public static class BricklinkFeignTest implements CommandLineRunner {
         private final BricklinkRestClient bricklinkRestClient;
@@ -334,7 +334,7 @@ public class BricklinkTestMain {
                 logger.error(e.getMessage());
             }
 
-            String orderId = "11648048";
+            String orderId = "11761339";
             BricklinkResource<Order> order = bricklinkRestClient.getOrder(orderId);
             logger.info("Order Id [{}] = [{}]", orderId, order.getData());
 

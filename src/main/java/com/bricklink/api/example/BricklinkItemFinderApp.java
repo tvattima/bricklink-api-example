@@ -104,8 +104,8 @@ public class BricklinkItemFinderApp {
             if (matchPercentage == 1.0d) {
                 BricklinkItem bricklinkItem = new BricklinkItem();
                 bricklinkItem.setItemId(item.getItemId());
-                bricklinkItem.setBricklinkItemNo(catalogItem.getItemNo());
-                bricklinkItem.setBricklinkItemId(catalogItem.getItemId());
+                bricklinkItem.setBlItemNumber(catalogItem.getItemNo());
+                bricklinkItem.setBlItemId(catalogItem.getItemId());
                 log.info("inserting bricklink_item({}, {}, {}) match % [{}]{} catalog items found [{}]", catalogItem.getItemId(), catalogItem.getItemNo(), item.getItemId(), numberFormat.format(matchPercentage), (matchPercentage < 1) ? "**" : "", catalogItems.size());
                 //itemDao.insertBricklinkItem(bricklinkItem);
             } else {
