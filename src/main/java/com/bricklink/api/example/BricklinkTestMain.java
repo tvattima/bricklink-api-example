@@ -346,6 +346,8 @@ public class BricklinkTestMain {
                     logger.info("\t\tOrderItem [{}]", oi);
                 });
             });
+
+            bricklinkWebService.updateInventoryCondition(191305563L, "U", "C");
         }
     }
 }
