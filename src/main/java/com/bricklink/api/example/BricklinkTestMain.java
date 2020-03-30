@@ -155,7 +155,7 @@ public class BricklinkTestMain {
         }
     }
 
-    @Component
+    //@Component
     @RequiredArgsConstructor
     public static class BricklinkFeignTest implements CommandLineRunner {
         private final BricklinkRestClient bricklinkRestClient;

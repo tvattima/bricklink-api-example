@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = {"com"})
 @EnableConfigurationProperties
@@ -101,8 +102,9 @@ public class MissingItemsRemediator {
 
                         //    Attempt first to find the item; if not found, upsert it.
                         String searchItemNumber = getSearchItemNumber(inventoryIndex.getItemNumber());
-                        net.bricklink.data.lego.dto.Item item = itemDao.findItemByNumber(searchItemNumber);
-                        if (null == item) {
+                        List<net.bricklink.data.lego.dto.Item> itemList = itemDao.findItemByNumber(searchItemNumber);
+                        net.bricklink.data.lego.dto.Item item = null;
+                        if (itemList.isEmpty()) {
                             shouldInsertItem = true;
                             log.info("\t\t\tItem Number not found in DB [{}]", inventoryIndex.getItemNumber());
                             //    Construct Item from Bricklink data
@@ -110,8 +112,11 @@ public class MissingItemsRemediator {
                             item.setItemNumber(searchItemNumber);
                             item.setItemName(set.getStrItemName());
                             item.setItemTypeCode("S");
-                        } else {
+                        } else if (itemList.size() == 1) {
+                            item = itemList.get(0);
                             log.info("\t\t\tItem found in DB [{}]", item);
+                        } else {
+                            throw new RuntimeException(String.format("Item number [%s] was not unique - found [%s]", searchItemNumber, itemList.size()));
                         }
                         log.info("\t\t\tSet [{}]", item);
 
