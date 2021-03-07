@@ -18,9 +18,12 @@ spring:
          maximum-pool-size: 5
          validation-timeout: 10000
          pool-name: site5-mysql-jdbc-pool
+   main:
+      web-application-type: none
 
 bricklink:
    rest:
+      uri: https://api.bricklink.com/api/store/v1
       client-config-dir: C:\Users\tvatt\.credentials\bricklink
       client-config-file: bricklink-client-api-keys.json
    web:

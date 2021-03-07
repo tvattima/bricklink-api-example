@@ -31,7 +31,7 @@ public class InventoryAddition {
         SpringApplication.run(InventoryAddition.class, args);
     }
 
-    @Component
+    //@Component
     @RequiredArgsConstructor
     public static class LoadInventoryItems implements CommandLineRunner {
         private final InventoryIndexDao inventoryIndexDao;
