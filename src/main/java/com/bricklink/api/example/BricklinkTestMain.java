@@ -122,6 +122,41 @@ public class BricklinkTestMain {
         }
     }
 
+    @Component
+    @RequiredArgsConstructor
+    @Slf4j
+    public static class BricklinkOrdersPlaced implements CommandLineRunner {
+        private final BricklinkRestClient bricklinkRestClient;
+        private final BricklinkRestProperties bricklinkRestProperties;
+        private final BricklinkWebService bricklinkWebService;
+        private final BricklinkInventoryDao bricklinkInventoryDao;
+
+        @Override
+        public void run(String... args) throws Exception {
+            logger.info("Bricklink Orders Placed");
+
+            // Get all incoming Completed orders' items
+            BricklinkResource<List<Order>> ordersResource = bricklinkRestClient.getOrders(new ParamsBuilder().of("direction", "out")
+                                                                                                             .of("filed", "false")
+                                                                                                             .get(), Arrays.asList("Completed"));
+            List<Order> orders = ordersResource.getData();
+            orders.stream()
+                  .map(o -> bricklinkRestClient.getOrder(o.getOrder_id()))
+                  .map(BricklinkResource::getData)
+                  .collect(Collectors.toList())
+                  .forEach(o -> {
+                      log.info("{},{},{},{},{},{},{},{}",
+                              o.getDate_ordered(),
+                              o.getStore_name(),
+                              o.getCost().getSubtotal(),
+                              o.getDisp_cost().getShipping(),
+                              o.getDisp_cost().getInsurance(),
+                              o.getDisp_cost().getEtc1(),
+                              o.getDisp_cost().getEtc2(),
+                              o.getCost().getGrand_total());
+                  });
+        }
+    }
 
     //@Component
     @RequiredArgsConstructor
@@ -169,14 +204,11 @@ public class BricklinkTestMain {
         }
     }
 
-    //@Component
+    @Component
     @RequiredArgsConstructor
     public class BricklinkFeignTest implements CommandLineRunner {
         private final BricklinkRestClient bricklinkRestClient;
-        private final BricklinkRestProperties bricklinkRestProperties;
         private final BricklinkWebService bricklinkWebService;
-        private final BricklinkAjaxClient bricklinkAjaxClient;
-        private final BricklinkInventoryDao bricklinkInventoryDao;
 
         @Override
         public void run(String... strings) throws Exception {
@@ -291,23 +323,25 @@ public class BricklinkTestMain {
 //            SearchProductResult searchProductResult = bricklinkAjaxClient.searchProduct(params);
 //            System.out.println(searchProductResult);
 //
-            List<BricklinkInventory> bricklinkInventoryList = bricklinkInventoryDao.getAll();
-            AtomicInteger counter = new AtomicInteger(1);
-            bricklinkInventoryList.forEach(bl -> {
-                logger.info(String.format("-[%d] [%s]-------------------------------------------------------------------------------------------------------------------", counter.getAndIncrement(), bl.getBlItemNo()));
-                params.clear();
-                params.put("itemid", bl.getBlItemId());
-                CatalogItemsForSaleResult catalogItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(params);
-                System.out.println(catalogItemsForSaleResult);
-                for (ItemForSale itemForSale : catalogItemsForSaleResult.getList()) {
-                    logger.info("{}", itemForSale);
-                }
-                try {
-                    Thread.sleep(1300); /*1200 failed*/
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
+
+
+//            List<BricklinkInventory> bricklinkInventoryList = bricklinkInventoryDao.getAll();
+//            AtomicInteger counter = new AtomicInteger(1);
+//            bricklinkInventoryList.forEach(bl -> {
+//                logger.info(String.format("-[%d] [%s]-------------------------------------------------------------------------------------------------------------------", counter.getAndIncrement(), bl.getBlItemNo()));
+//                params.clear();
+//                params.put("itemid", bl.getBlItemId());
+//                CatalogItemsForSaleResult catalogItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(params);
+//                System.out.println(catalogItemsForSaleResult);
+//                for (ItemForSale itemForSale : catalogItemsForSaleResult.getList()) {
+//                    logger.info("{}", itemForSale);
+//                }
+//                try {
+//                    Thread.sleep(1300); /*1200 failed*/
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            });
 
             BricklinkResource<List<Color>> colors = bricklinkRestClient.getColors();
             logger.info("Metadata [{}]", colors.getMeta());
@@ -363,7 +397,7 @@ public class BricklinkTestMain {
                 logger.error(e.getMessage());
             }
 
-            String orderId = "11761339";
+            String orderId = "17040946";
             BricklinkResource<Order> order = bricklinkRestClient.getOrder(orderId);
             logger.info("Order Id [{}] = [{}]", orderId, order.getData());
 
