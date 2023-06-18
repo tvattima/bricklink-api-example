@@ -116,7 +116,7 @@ public class MissingItemsRemediator {
                             item = itemList.get(0);
                             log.info("\t\t\tItem found in DB [{}]", item);
                         } else {
-                            throw new RuntimeException(String.format("Item number [%s] was not unique - found [%s]", searchItemNumber, itemList.size()));
+                            throw new RuntimeException("Item number [%s] was not unique - found [%s]".formatted(searchItemNumber, itemList.size()));
                         }
                         log.info("\t\t\tSet [{}]", item);
 

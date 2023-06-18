@@ -1,9 +1,5 @@
 package com.bricklink.api.example;
 
-import com.bricklink.api.ajax.BricklinkAjaxClient;
-import com.bricklink.api.ajax.model.v1.ItemForSale;
-import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
-import com.bricklink.api.html.BricklinkHtmlClient;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.client.ParamsBuilder;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
@@ -30,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
 import net.bricklink.data.lego.dao.ItemDao;
-import net.bricklink.data.lego.dto.BricklinkInventory;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -49,7 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -391,7 +385,7 @@ public class BricklinkTestMain {
             String bogusOrderId = "10000008";
             try {
                 BricklinkResource<Order> bricklinkOrder = bricklinkRestClient.getOrder(bogusOrderId);
-                Order order = Optional.ofNullable(bricklinkOrder.getData()).orElseThrow(() -> new Exception(String.format("Order Id [%1$s] was not found", bogusOrderId)));
+                Order order = Optional.ofNullable(bricklinkOrder.getData()).orElseThrow(() -> new Exception("Order Id [%1$s] was not found".formatted(bogusOrderId)));
                 logger.info("Order Id [{}] = [{}]", bogusOrderId, order);
             } catch (Exception e) {
                 logger.error(e.getMessage());
