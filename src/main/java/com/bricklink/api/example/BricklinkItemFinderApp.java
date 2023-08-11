@@ -1,7 +1,10 @@
 package com.bricklink.api.example;
 
+import com.bricklink.api.ajax.BricklinkAjaxClient;
+import com.bricklink.api.ajax.support.CatalogItemsForSaleResult;
 import com.bricklink.api.html.BricklinkHtmlClient;
 import com.bricklink.api.html.model.v2.CatalogItem;
+import com.bricklink.api.rest.client.ParamsBuilder;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.InventoryIndexDao;
 import net.bricklink.data.lego.dao.ItemDao;
@@ -95,6 +98,39 @@ public class BricklinkItemFinderApp {
         }
     }
 
+    @Slf4j
+    //@Component
+    public static class BricklinkPartFinder implements CommandLineRunner {
+
+        @Autowired
+        private BricklinkHtmlClient bricklinkHtmlClient;
+
+        @Autowired
+        private BricklinkAjaxClient bricklinkAjaxClient;
+
+        @Override
+        public void run(String... args) throws Exception {
+            CatalogItem catalogItem = bricklinkHtmlClient.getCatalogPartItemId("99780");
+            log.info("CatalogItem {}",catalogItem);
+
+            CatalogItemsForSaleResult catalogNewItemsForSaleResult = bricklinkAjaxClient.catalogItemsForSale(
+                    new ParamsBuilder()
+                            .of("itemid", catalogItem.getItemId())
+                            .of("rpp", 50)
+                            .of("loc", "US")
+                            .of("minqty", "6")
+                            .of("cond", "N")
+                            .of("st", "1")
+                            .of("color", "11")
+                            .get());
+            log.info("-------------------------------------------------------------------------------");
+            catalogNewItemsForSaleResult.getList().forEach(fsr -> {
+                log.info("{}", fsr);
+            });
+            log.info("-------------------------------------------------------------------------------");
+        }
+    }
+
     @Transactional
     public Item upsertBricklinkItem(BricklinkHtmlClient bricklinkHtmlClient, Item item) {
         List<CatalogItem> catalogItems = getBricklinkItems(bricklinkHtmlClient, item);
@@ -160,6 +196,8 @@ public class BricklinkItemFinderApp {
                 catalogItem = Optional.of(bricklinkHtmlClient.getCatalogSetItemId(item.getItemNumber().matches("[0-9]+?-[0-9]+?")?item.getItemNumber():item.getItemNumber() + "-" + index));
             } else if ("B".equals(bricklinkItemType)) {
                 catalogItem = Optional.of(bricklinkHtmlClient.getCatalogBookItemId(item.getItemNumber()));
+            } else if ("P".equals(bricklinkItemType)) {
+                catalogItem = Optional.of(bricklinkHtmlClient.getCatalogPartItemId(item.getItemNumber()));
             } else if ("G".equals(bricklinkItemType)) {
                 catalogItem = Optional.of(bricklinkHtmlClient.getCatalogGearItemId(item.getItemNumber()));
             }

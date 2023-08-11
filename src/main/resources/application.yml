@@ -58,4 +58,4 @@ lego:
       #workbook: By BOX, by NUMBER
       range: A2:F
 
-debug: false
+debug: true
