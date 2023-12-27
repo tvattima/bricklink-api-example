@@ -10,7 +10,7 @@ import com.bricklink.api.rest.model.v1.Inventory;
 import com.bricklink.api.rest.model.v1.ItemMapping;
 import com.bricklink.api.rest.model.v1.Order;
 import com.bricklink.api.rest.model.v1.OrderItem;
-import com.bricklink.web.support.BricklinkWebService;
+import com.bricklink.web.api.BricklinkWebService;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
 import com.vattima.lego.sheet.meta.BooleanCellDescriptor;
 import com.vattima.lego.sheet.meta.CellDescriptor;
