@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.NumberFormat;
@@ -35,6 +36,18 @@ public class BricklinkItemFinderApp {
     public static void main(String[] args) {
         log.info("hi");
         SpringApplication.run(BricklinkItemFinderApp.class, args);
+    }
+
+    @Component
+    public class BricklinkItemFinder2 implements CommandLineRunner {
+        @Autowired
+        private BricklinkHtmlClient bricklinkHtmlClient;
+
+        @Override
+        public void run(String... args) throws Exception {
+            CatalogItem catalogItem = bricklinkHtmlClient.getCatalogSetItemId("6339-1");
+            log.info("Found CatalogItem [{}]", catalogItem);
+        }
     }
 
     //@Component
