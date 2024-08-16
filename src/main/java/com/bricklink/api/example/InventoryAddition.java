@@ -6,17 +6,16 @@ import com.bricklink.api.rest.model.v1.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
-import net.bricklink.data.lego.dao.InventoryIndexDao;
-import net.bricklink.data.lego.dao.ItemDao;
+import net.lego.data.v1.dao.InventoryIndexDao;
+import net.lego.data.v1.dao.ItemDao;
 import net.bricklink.data.lego.dto.BricklinkInventory;
 import net.bricklink.data.lego.dto.BricklinkItem;
-import net.bricklink.data.lego.dto.InventoryIndex;
 import net.bricklink.data.lego.ibatis.mapper.BricklinkItemMapper;
+import net.lego.data.v1.dto.InventoryIndex;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,11 +62,11 @@ public class InventoryAddition {
                 log.info("\t{}", bricklinkItem);
 
                 // Find in Item table
-                List<net.bricklink.data.lego.dto.Item> itemList = itemDao.findItemByNumber(ii.getItemNumber());
-                net.bricklink.data.lego.dto.Item item = null;
+                List<net.lego.data.v1.dto.Item> itemList = itemDao.findItemByNumber(ii.getItemNumber());
+                net.lego.data.v1.dto.Item item = null;
                 if (itemList.size() == 0) {
                     log.warn("\tUnable to find item number [{}]", ii.getItemNumber());
-                    item = new net.bricklink.data.lego.dto.Item();
+                    item = new net.lego.data.v1.dto.Item();
                     item.setItemNumber(ii.getItemNumber());
                     item.setItemName(bricklinkItem.getData().getName());
                     item.setIssueYear(bricklinkItem.getData().getYear_released());

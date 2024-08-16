@@ -16,13 +16,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.bricklink.data.lego.dao.InventoryIndexDao;
-import net.bricklink.data.lego.dao.ItemDao;
+import net.lego.data.v1.dao.InventoryIndexDao;
+import net.lego.data.v1.dao.ItemDao;
 import net.bricklink.data.lego.dao.TransactionDao;
 import net.bricklink.data.lego.dto.BricklinkItem;
-import net.bricklink.data.lego.dto.InventoryIndex;
 import net.bricklink.data.lego.dto.Transaction;
 import net.bricklink.data.lego.dto.TransactionItem;
+import net.lego.data.v1.dto.InventoryIndex;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = {"com"})
 @EnableConfigurationProperties
@@ -102,13 +101,13 @@ public class MissingItemsRemediator {
 
                         //    Attempt first to find the item; if not found, upsert it.
                         String searchItemNumber = getSearchItemNumber(inventoryIndex.getItemNumber());
-                        List<net.bricklink.data.lego.dto.Item> itemList = itemDao.findItemByNumber(searchItemNumber);
-                        net.bricklink.data.lego.dto.Item item = null;
+                        List<net.lego.data.v1.dto.Item> itemList = itemDao.findItemByNumber(searchItemNumber);
+                        net.lego.data.v1.dto.Item item = null;
                         if (itemList.isEmpty()) {
                             shouldInsertItem = true;
                             log.info("\t\t\tItem Number not found in DB [{}]", inventoryIndex.getItemNumber());
                             //    Construct Item from Bricklink data
-                            item = new net.bricklink.data.lego.dto.Item();
+                            item = new net.lego.data.v1.dto.Item();
                             item.setItemNumber(searchItemNumber);
                             item.setItemName(set.getStrItemName());
                             item.setItemTypeCode("S");
@@ -166,7 +165,7 @@ public class MissingItemsRemediator {
                         }
                         description.append(sb.toString());
                         inventoryIndex.setDescription(description.toString());
-                        inventoryIndexDao.udpateInventoryIndex(inventoryIndex);
+                        inventoryIndexDao.udpate(inventoryIndex);
                     }
                 } else {
                     log.error("\tBricklink Secret search was not 1");
@@ -201,7 +200,7 @@ public class MissingItemsRemediator {
 
                 //    For each Item in the List of that key
                 for (ItemInventoryIndexHolder itemInventoryIndexHolder: itemsByYearMap.get(year)) {
-                    net.bricklink.data.lego.dto.Item item = itemInventoryIndexHolder.getItem();
+                    net.lego.data.v1.dto.Item item = itemInventoryIndexHolder.getItem();
                     InventoryIndex inventoryIndex = itemInventoryIndexHolder.getInventoryIndex();
                     log.info("\t\t ---> Item [{}]", item);
                     // Based on the quantity in the inventory index and the sealed indicator, build the TransactionItems
@@ -247,7 +246,7 @@ public class MissingItemsRemediator {
         @Setter
         @EqualsAndHashCode
         private class ItemInventoryIndexHolder {
-            private final net.bricklink.data.lego.dto.Item item;
+            private final net.lego.data.v1.dto.Item item;
             private final InventoryIndex inventoryIndex;
         }
     }

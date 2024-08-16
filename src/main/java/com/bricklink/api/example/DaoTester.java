@@ -3,15 +3,14 @@ package com.bricklink.api.example;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
-import net.bricklink.data.lego.dao.InventoryIndexDao;
-import net.bricklink.data.lego.dao.ItemDao;
+import net.lego.data.v1.dao.InventoryIndexDao;
+import net.lego.data.v1.dao.ItemDao;
 import net.bricklink.data.lego.dao.TransactionDao;
 import net.bricklink.data.lego.dto.BricklinkInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

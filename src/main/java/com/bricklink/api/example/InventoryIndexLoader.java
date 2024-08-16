@@ -7,8 +7,8 @@ import com.vattima.lego.sheet.meta.IntegerCellDescriptor;
 import com.vattima.lego.sheet.meta.StringCellDescriptor;
 import com.vattima.lego.sheet.model.LegoSheetItem;
 import com.vattima.lego.sheet.service.LegoItemSheetService;
-import net.bricklink.data.lego.dao.InventoryIndexDao;
-import net.bricklink.data.lego.dto.InventoryIndex;
+import net.lego.data.v1.dao.InventoryIndexDao;
+import net.lego.data.v1.dto.InventoryIndex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +58,7 @@ public class InventoryIndexLoader {
                 inventoryIndex.setSealed(Boolean.toString(legoSheetItem.isSealed()));
                 inventoryIndex.setQuantity(legoSheetItem.getQuantity());
                 inventoryIndex.setDescription(legoSheetItem.getDescription());
-                inventoryIndexDao.insertInventoryIndex(inventoryIndex);
+                inventoryIndexDao.insert(inventoryIndex);
             }
         }
     }

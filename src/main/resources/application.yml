@@ -4,8 +4,8 @@ spring:
    application:
      name: Lego Bricklink Inventory
    datasource:
-      client-config-dir: C:\Users\tvatt\.credentials\site5\database
-      client-config-file: site5-database-configuration.json
+      client-config-dir: C:\Users\tvatt\.credentials\database
+      client-config-file: database-configuration.json
       database-key-name: site5-lego-dev
       hikari:
          connection-timeout: 10000

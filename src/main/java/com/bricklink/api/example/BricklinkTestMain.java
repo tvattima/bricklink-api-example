@@ -1,5 +1,6 @@
 package com.bricklink.api.example;
 
+import com.bricklink.api.ajax.PagingBricklinkAjaxClient;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.client.ParamsBuilder;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
@@ -21,7 +22,7 @@ import com.vattima.lego.sheet.service.LegoItemSheetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
-import net.bricklink.data.lego.dao.ItemDao;
+import net.lego.data.v1.dao.ItemDao;
 import net.bricklink.data.lego.dto.BricklinkInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -159,10 +160,21 @@ public class BricklinkTestMain {
         private final BricklinkRestProperties bricklinkRestProperties;
         private final BricklinkWebService bricklinkWebService;
         private final BricklinkInventoryDao bricklinkInventoryDao;
+        private final PagingBricklinkAjaxClient pagingBricklinkAjaxClient;
 
         @Override
         public void run(String... args) throws Exception {
             log.info("Bricklink Sold Item Inventory Finder");
+
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6375", "Gas Station");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("70143", "Sir Fangar's Saber Tooth Walker");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("70143", "Sir Fangar's Saber Tooth Walker");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6464", "Super Rescue Complex");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6600", "Police Patrol");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6602", "Fire Unit 1");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6626", "Rescue Helicopter");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6648", "Dump Truck");
+            pagingBricklinkAjaxClient.searchItemsByNumberAndName("6679", "Tow Truck");
 
             List<Inventory> inventoryList = bricklinkRestClient.getInventories(Map.of())
                                                                .getData();
