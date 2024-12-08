@@ -20,15 +20,13 @@ spring:
          pool-name: site5-mysql-jdbc-pool
    main:
       web-application-type: none
+   config:
+      import: file:/dev/config/bricklink/bricklink-client-api-keys.yml, file:/dev/config/bricklink/bricklink-web.yml
 
 bricklink:
    rest:
       uri: https://api.bricklink.com/api/store/v1
-      client-config-dir: C:\Users\tvatt\.credentials\bricklink
-      client-config-file: bricklink-client-api-keys.json
    web:
-      client-config-dir: C:\Users\tvatt\.credentials\bricklink
-      client-config-file: bricklink-web.json
       pool:
          default-max-per-route: 20
          max-per-route: 20
@@ -40,6 +38,7 @@ logging:
       com.vattima.lego.data.ibatis.mapper: WARN
       net.bricklink.data: WARN
       org.springframework.jdbc: WARN
+      org.springframework: DEBUG
       org.mybatis: WARN
       com.gargoylesoftware: ERROR
       com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
@@ -58,4 +57,4 @@ lego:
       #workbook: By BOX, by NUMBER
       range: A2:F
 
-debug: true
+debug: false
