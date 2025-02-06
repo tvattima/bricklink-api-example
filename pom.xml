@@ -24,7 +24,7 @@
     <lego-inventory-sheet.version>1.3.0-SNAPSHOT</lego-inventory-sheet.version>
     <bricklink-reporting.version>1.2.0-SNAPSHOT</bricklink-reporting.version>
     <bricklink-html.version>1.3.0-SNAPSHOT</bricklink-html.version>
-    <bricklink-data.version>1.3.0-SNAPSHOT</bricklink-data.version>
+    <lego-data.version>1.3.0-SNAPSHOT</lego-data.version>
     <bricklink-ajax.version>1.3.0-SNAPSHOT</bricklink-ajax.version>
     <bricklink-rest.version>1.3.0-SNAPSHOT</bricklink-rest.version>
   </properties>
@@ -49,9 +49,9 @@
     </dependency>
 
     <dependency>
-      <groupId>com.bricklink.data</groupId>
-      <artifactId>bricklink-data</artifactId>
-      <version>${bricklink-data.version}</version>
+      <groupId>net.lego</groupId>
+      <artifactId>lego-data</artifactId>
+      <version>${lego-data.version}</version>
     </dependency>
 
     <dependency>
