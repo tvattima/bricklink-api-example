@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.1</version>
+    <version>3.5.7</version>
   </parent>
 
   <groupId>com.bricklink.api</groupId>
@@ -18,8 +18,8 @@
     <java.version>17</java.version>
     <mockito.version>5.3.1</mockito.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <lombok.version>1.18.30</lombok.version>
-    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <lombok.version>1.18.42</lombok.version>
+    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
     <mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
     <lego-inventory-sheet.version>1.3.0-SNAPSHOT</lego-inventory-sheet.version>
     <bricklink-reporting.version>1.2.0-SNAPSHOT</bricklink-reporting.version>
@@ -28,12 +28,20 @@
     <bricklink-ajax.version>1.3.0-SNAPSHOT</bricklink-ajax.version>
     <bricklink-rest.version>1.3.0-SNAPSHOT</bricklink-rest.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>net.sourceforge.htmlunit</groupId>
+        <artifactId>htmlunit</artifactId>
+        <version>2.70.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>net.sourceforge.htmlunit</groupId>
       <artifactId>htmlunit</artifactId>
-      <version>2.46.0</version>
     </dependency>
 
     <dependency>
@@ -107,7 +115,6 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
       <optional>true</optional>
     </dependency>
 
@@ -181,7 +188,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <release>${java.version}</release>
         </configuration>
@@ -189,7 +195,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.4</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -212,19 +217,23 @@
       <plugin>
         <groupId>org.openrewrite.maven</groupId>
         <artifactId>rewrite-maven-plugin</artifactId>
-        <version>5.17.1</version>
+        <version>6.22.1</version>
         <configuration>
           <activeRecipes>
             <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0</recipe>
             <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1</recipe>
             <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.SpringBootProperties_3_3</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_4</recipe>
+            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5</recipe>
           </activeRecipes>
         </configuration>
         <dependencies>
           <dependency>
             <groupId>org.openrewrite.recipe</groupId>
             <artifactId>rewrite-spring</artifactId>
-            <version>5.1.7</version>
+            <version>6.17.0</version>
           </dependency>
         </dependencies>
       </plugin>
