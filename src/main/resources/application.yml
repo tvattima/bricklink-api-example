@@ -4,9 +4,8 @@ spring:
    application:
      name: Lego Bricklink Inventory
    datasource:
-      client-config-dir: C:\Users\tvatt\.credentials\database
-      client-config-file: database-configuration.json
-      database-key-name: site5-lego-dev
+      # database-key-name: rasppi5-01-lego-sandbox
+      database-key-name: rasppi5-01-lego-prod-legacy
       hikari:
          connection-timeout: 10000
          idle-timeout: 30000
@@ -21,7 +20,7 @@ spring:
    main:
       web-application-type: none
    config:
-      import: file:/dev/config/bricklink/bricklink-client-api-keys.yml, file:/dev/config/bricklink/bricklink-web.yml
+      import: file:/dev/config/bricklink/bricklink-client-api-keys.yml, file:/dev/config/bricklink/bricklink-web.yml, file:/dev/config/database/database-configuration.yml
 
 bricklink:
    rest:
@@ -31,22 +30,29 @@ bricklink:
          default-max-per-route: 20
          max-per-route: 20
          max-total: 50
+      urls:
+        login-logout: "https://www.bricklink.com/ajax/renovate/loginandout.ajax"
+        imgAdd: "https://www.bricklink.com/imgAdd.asp"
+        inventoryDetail: "https://www.bricklink.com/inventory_detail.asp"
+        inventoryUpdate: "https://www.bricklink.com/inventory_detail.asp"
+        wantedListDownload: "https://www.bricklink.com/files/clone/wanted/downloadXML.file"
+        catalogDownload: "https://www.bricklink.com/catalogDownload.asp?a=a"
 
 logging:
    level:
       root: INFO
-      com.vattima.lego.data.ibatis.mapper: WARN
-      net.bricklink.data: WARN
-      org.springframework.jdbc: WARN
-      org.springframework: DEBUG
-      org.mybatis: WARN
-      com.gargoylesoftware: ERROR
-      com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
-      com.zaxxer: WARN
-      org.apache: WARN
-      feign: WARN
-      sun: WARN
-      okhttp3: WARN
+#      com.vattima.lego.data.ibatis.mapper: WARN
+#      net.bricklink.data: WARN
+#      org.springframework.jdbc: WARN
+#      org.springframework: DEBUG
+#      org.mybatis: WARN
+#      com.gargoylesoftware: ERROR
+#      com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter: OFF
+#      com.zaxxer: WARN
+#      org.apache: WARN
+#      feign: WARN
+#      sun: WARN
+#      okhttp3: WARN
 
 lego:
    sheet:
@@ -56,5 +62,3 @@ lego:
       workbook: By BOX
       #workbook: By BOX, by NUMBER
       range: A2:F
-
-debug: false

@@ -1,242 +1,242 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.7</version>
-  </parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.7</version>
+    </parent>
 
-  <groupId>com.bricklink.api</groupId>
-  <artifactId>bricklink-api-example</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  <name>Bricklink API Example</name>
+    <groupId>com.bricklink.api</groupId>
+    <artifactId>bricklink-api-example</artifactId>
+    <version>1.2.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Bricklink API Example</name>
 
-  <properties>
-    <java.version>17</java.version>
-    <mockito.version>5.3.1</mockito.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <lombok.version>1.18.42</lombok.version>
-    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
-    <mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
-    <lego-inventory-sheet.version>1.3.0-SNAPSHOT</lego-inventory-sheet.version>
-    <bricklink-reporting.version>1.2.0-SNAPSHOT</bricklink-reporting.version>
-    <bricklink-html.version>1.3.0-SNAPSHOT</bricklink-html.version>
-    <lego-data.version>1.3.0-SNAPSHOT</lego-data.version>
-    <bricklink-ajax.version>1.3.0-SNAPSHOT</bricklink-ajax.version>
-    <bricklink-rest.version>1.3.0-SNAPSHOT</bricklink-rest.version>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
-        <artifactId>htmlunit</artifactId>
-        <version>2.70.0</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>net.sourceforge.htmlunit</groupId>
-      <artifactId>htmlunit</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.bricklink.api</groupId>
-      <artifactId>bricklink-rest</artifactId>
-      <version>${bricklink-rest.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.bricklink.api</groupId>
-      <artifactId>bricklink-ajax</artifactId>
-      <version>${bricklink-ajax.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>net.lego</groupId>
-      <artifactId>lego-data</artifactId>
-      <version>${lego-data.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.bricklink.api</groupId>
-      <artifactId>bricklink-html</artifactId>
-      <version>${bricklink-html.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.vattima.bricklink</groupId>
-      <artifactId>bricklink-reporting</artifactId>
-      <version>${bricklink-reporting.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.vattima.lego</groupId>
-      <artifactId>lego-inventory-sheet</artifactId>
-      <version>${lego-inventory-sheet.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-xml</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>${mybatis-spring-boot-starter.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-pool2</artifactId>
-    </dependency>
-
-    <!-- Test dependencies -->
-
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <release>${java.version}</release>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>com.bricklink.api.example.App</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.openrewrite.maven</groupId>
-        <artifactId>rewrite-maven-plugin</artifactId>
-        <version>6.22.1</version>
-        <configuration>
-          <activeRecipes>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.SpringBootProperties_3_3</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_4</recipe>
-            <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5</recipe>
-          </activeRecipes>
-        </configuration>
+    <properties>
+        <java.version>17</java.version>
+        <mockito.version>5.3.1</mockito.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.42</lombok.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <mybatis-spring-boot-starter.version>3.0.3</mybatis-spring-boot-starter.version>
+        <lego-inventory-sheet.version>1.3.0-SNAPSHOT</lego-inventory-sheet.version>
+        <bricklink-reporting.version>1.2.0-SNAPSHOT</bricklink-reporting.version>
+        <bricklink-html.version>1.3.0-SNAPSHOT</bricklink-html.version>
+        <lego-data.version>1.3.0-SNAPSHOT</lego-data.version>
+        <bricklink-ajax.version>1.3.0-SNAPSHOT</bricklink-ajax.version>
+        <bricklink-rest.version>1.3.0-SNAPSHOT</bricklink-rest.version>
+    </properties>
+    <dependencyManagement>
         <dependencies>
-          <dependency>
-            <groupId>org.openrewrite.recipe</groupId>
-            <artifactId>rewrite-spring</artifactId>
-            <version>6.17.0</version>
-          </dependency>
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>2.70.0</version>
+            </dependency>
         </dependencies>
-      </plugin>
-    </plugins>
-  </build>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bricklink.api</groupId>
+            <artifactId>bricklink-rest</artifactId>
+            <version>${bricklink-rest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bricklink.api</groupId>
+            <artifactId>bricklink-ajax</artifactId>
+            <version>${bricklink-ajax.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.lego</groupId>
+            <artifactId>lego-data</artifactId>
+            <version>${lego-data.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bricklink.api</groupId>
+            <artifactId>bricklink-html</artifactId>
+            <version>${bricklink-html.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vattima.bricklink</groupId>
+            <artifactId>bricklink-reporting</artifactId>
+            <version>${bricklink-reporting.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vattima.lego</groupId>
+            <artifactId>lego-inventory-sheet</artifactId>
+            <version>${lego-inventory-sheet.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.bricklink.api.example.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <version>6.22.1</version>
+                <configuration>
+                    <activeRecipes>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.SpringBootProperties_3_3</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_3</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_4</recipe>
+                        <recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_5</recipe>
+                    </activeRecipes>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-spring</artifactId>
+                        <version>6.17.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>

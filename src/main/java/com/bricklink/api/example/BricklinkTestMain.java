@@ -4,13 +4,7 @@ import com.bricklink.api.ajax.PagingBricklinkAjaxClient;
 import com.bricklink.api.rest.client.BricklinkRestClient;
 import com.bricklink.api.rest.client.ParamsBuilder;
 import com.bricklink.api.rest.configuration.BricklinkRestProperties;
-import com.bricklink.api.rest.model.v1.BricklinkResource;
-import com.bricklink.api.rest.model.v1.Category;
-import com.bricklink.api.rest.model.v1.Color;
-import com.bricklink.api.rest.model.v1.Inventory;
-import com.bricklink.api.rest.model.v1.ItemMapping;
-import com.bricklink.api.rest.model.v1.Order;
-import com.bricklink.api.rest.model.v1.OrderItem;
+import com.bricklink.api.rest.model.v1.*;
 import com.bricklink.web.api.BricklinkWebService;
 import com.vattima.lego.sheet.configuration.LegoItemSheetProperties;
 import com.vattima.lego.sheet.meta.BooleanCellDescriptor;
@@ -22,8 +16,8 @@ import com.vattima.lego.sheet.service.LegoItemSheetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bricklink.data.lego.dao.BricklinkInventoryDao;
-import net.lego.data.v1.dao.ItemDao;
 import net.bricklink.data.lego.dto.BricklinkInventory;
+import net.lego.data.v1.dao.ItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,12 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -86,27 +75,27 @@ public class BricklinkTestMain {
         public void run(String... args) throws Exception {
             log.info("Bricklink Quantity Fixer");
             bricklinkInventoryDao.getAllForSale()
-                                 .stream()
+                    .stream()
 //                                 .filter(bi -> bi.getInventoryId()
 //                                                 .equals(174931488L))
-                                 .forEach(bi -> {
-                                     Optional.of(bi.getInventoryId())
-                                             .ifPresent(ii -> {
-                                                 int inventoryQuantity = bi.getQuantity();
+                    .forEach(bi -> {
+                        Optional.of(bi.getInventoryId())
+                                .ifPresent(ii -> {
+                                    int inventoryQuantity = bi.getQuantity();
 
-                                                 BricklinkResource<Inventory> inventoryResponse = bricklinkRestClient.getInventories(ii);
-                                                 Inventory inventory = inventoryResponse.getData();
-                                                 int bricklinkQuantity = inventory.getQuantity();
-                                                 int delta = inventoryQuantity - bricklinkQuantity;
-                                                 if ((delta < 1) && (bricklinkQuantity != (bricklinkQuantity + delta))) {
-                                                     inventory.setQuantity(delta);
-                                                     inventory.setRemarks(bi.getUuid());
-                                                     inventory.setDate_created(null);
-                                                     bricklinkRestClient.updateInventory(ii, inventory);
-                                                     log.info("Updated [{} : {}] from quantity [{}] to new quantity [{}]", bi.getBlItemNo(), bi.getUuid(), bricklinkQuantity, (bricklinkQuantity + delta));
-                                                 }
-                                             });
-                                 });
+                                    BricklinkResource<Inventory> inventoryResponse = bricklinkRestClient.getInventories(ii);
+                                    Inventory inventory = inventoryResponse.getData();
+                                    int bricklinkQuantity = inventory.getQuantity();
+                                    int delta = inventoryQuantity - bricklinkQuantity;
+                                    if ((delta < 1) && (bricklinkQuantity != (bricklinkQuantity + delta))) {
+                                        inventory.setQuantity(delta);
+                                        inventory.setRemarks(bi.getUuid());
+                                        inventory.setDate_created(null);
+                                        bricklinkRestClient.updateInventory(ii, inventory);
+                                        log.info("Updated [{} : {}] from quantity [{}] to new quantity [{}]", bi.getBlItemNo(), bi.getUuid(), bricklinkQuantity, (bricklinkQuantity + delta));
+                                    }
+                                });
+                    });
         }
     }
 
@@ -125,34 +114,34 @@ public class BricklinkTestMain {
 
             // Get all incoming Completed orders' items
             BricklinkResource<List<Order>> ordersResource = bricklinkRestClient.getOrders(new ParamsBuilder().of("direction", "out")
-                                                                                                             .of("filed", "false")
-                                                                                                             .get(), Arrays.asList("Completed"));
+                    .of("filed", "false")
+                    .get(), Arrays.asList("Completed"));
             List<Order> orders = ordersResource.getData();
             orders.stream()
-                  .map(o -> bricklinkRestClient.getOrder(o.getOrder_id()))
-                  .map(BricklinkResource::getData)
-                  .collect(Collectors.toList())
-                  .forEach(o -> {
-                      log.info("{},{},{},{},{},{},{},{}",
-                              o.getDate_ordered(),
-                              o.getStore_name(),
-                              o.getCost()
-                               .getSubtotal(),
-                              o.getDisp_cost()
-                               .getShipping(),
-                              o.getDisp_cost()
-                               .getInsurance(),
-                              o.getDisp_cost()
-                               .getEtc1(),
-                              o.getDisp_cost()
-                               .getEtc2(),
-                              o.getCost()
-                               .getGrand_total());
-                  });
+                    .map(o -> bricklinkRestClient.getOrder(o.getOrder_id()))
+                    .map(BricklinkResource::getData)
+                    .collect(Collectors.toList())
+                    .forEach(o -> {
+                        log.info("{},{},{},{},{},{},{},{}",
+                                o.getDate_ordered(),
+                                o.getStore_name(),
+                                o.getCost()
+                                        .getSubtotal(),
+                                o.getDisp_cost()
+                                        .getShipping(),
+                                o.getDisp_cost()
+                                        .getInsurance(),
+                                o.getDisp_cost()
+                                        .getEtc1(),
+                                o.getDisp_cost()
+                                        .getEtc2(),
+                                o.getCost()
+                                        .getGrand_total());
+                    });
         }
     }
 
-    @Component
+    //@Component
     @RequiredArgsConstructor
     @Slf4j
     public static class BricklinkSoldItemInventoryFinder implements CommandLineRunner {
@@ -177,17 +166,17 @@ public class BricklinkTestMain {
             pagingBricklinkAjaxClient.searchItemsByNumberAndName("6679", "Tow Truck");
 
             List<Inventory> inventoryList = bricklinkRestClient.getInventories(Map.of())
-                                                               .getData();
+                    .getData();
             inventoryList.stream()
-                         .filter(i -> i.getIs_stock_room()
-                                       .equals(Boolean.FALSE))
-                         .forEach(i -> {
-                             List<BricklinkInventory> bricklinkInventories = bricklinkInventoryDao.findByBricklinkitemNumber(i.getItem()
-                                                                                                                              .getNo());
-                             bricklinkInventories.stream().filter(bi -> bi.getInventoryId().equals(i.getInventory_id())).filter(bi -> null != bi.getOrderId()).forEach(bi -> {
-                                 log.warn("There may be a problem with this inventory item {} {} {} \n\t\t database inventory item {}", i.getInventory_id(), i.getItem().getNo(), i.getItem().getName(), bi);
-                             });
-                         });
+                    .filter(i -> i.getIs_stock_room()
+                            .equals(Boolean.FALSE))
+                    .forEach(i -> {
+                        List<BricklinkInventory> bricklinkInventories = bricklinkInventoryDao.findByBricklinkitemNumber(i.getItem()
+                                .getNo());
+                        bricklinkInventories.stream().filter(bi -> bi.getInventoryId().equals(i.getInventory_id())).filter(bi -> null != bi.getOrderId()).forEach(bi -> {
+                            log.warn("There may be a problem with this inventory item {} {} {} \n\t\t database inventory item {}", i.getInventory_id(), i.getItem().getNo(), i.getItem().getName(), bi);
+                        });
+                    });
 
 //            // Get all incoming Completed orders' items
 //            BricklinkResource<List<Order>> ordersResource = bricklinkRestClient.getOrders(new ParamsBuilder().of("direction", "in")
@@ -237,34 +226,34 @@ public class BricklinkTestMain {
 
             // Get all incoming Completed orders' items
             BricklinkResource<List<Order>> ordersResource = bricklinkRestClient.getOrders(new ParamsBuilder().of("direction", "in")
-                                                                                                             .of("filed", "true")
-                                                                                                             .get(), Arrays.asList("Completed"));
+                    .of("filed", "true")
+                    .get(), Arrays.asList("Completed"));
             List<Order> orders = ordersResource.getData();
             orders.stream()
-                  .map(o -> bricklinkRestClient.getOrderItems(o.getOrder_id()))
-                  .map(BricklinkResource::getData)
-                  .map(Collection::stream)
-                  .flatMap(s -> s.flatMap(List::stream))
-                  .filter(oi -> oi.getItem()
-                                  .getType()
-                                  .equals("SET"))
-                  .map(oi -> {
-                      Inventory bi = null;
-                      try {
-                          bi = bricklinkRestClient.getInventories(oi.getInventory_id())
-                                                  .getData();
-                      } catch (Exception e) {
-                          bi = new Inventory();
-                          bi.setInventory_id(oi.getInventory_id());
-                          bi.setIs_stock_room(true);
-                      }
-                      return bi;
-                  })
-                  .filter(bi -> !bi.getIs_stock_room())
-                  .collect(Collectors.toList())
-                  .forEach(bi -> {
-                      log.info("THIS INVENTORY SHOULD BE SET TO STOCKROOM! --> {}", bi);
-                  });
+                    .map(o -> bricklinkRestClient.getOrderItems(o.getOrder_id()))
+                    .map(BricklinkResource::getData)
+                    .map(Collection::stream)
+                    .flatMap(s -> s.flatMap(List::stream))
+                    .filter(oi -> oi.getItem()
+                            .getType()
+                            .equals("SET"))
+                    .map(oi -> {
+                        Inventory bi = null;
+                        try {
+                            bi = bricklinkRestClient.getInventories(oi.getInventory_id())
+                                    .getData();
+                        } catch (Exception e) {
+                            bi = new Inventory();
+                            bi.setInventory_id(oi.getInventory_id());
+                            bi.setIs_stock_room(true);
+                        }
+                        return bi;
+                    })
+                    .filter(bi -> !bi.getIs_stock_room())
+                    .collect(Collectors.toList())
+                    .forEach(bi -> {
+                        log.info("THIS INVENTORY SHOULD BE SET TO STOCKROOM! --> {}", bi);
+                    });
         }
     }
 
@@ -410,13 +399,13 @@ public class BricklinkTestMain {
             BricklinkResource<List<Color>> colors = bricklinkRestClient.getColors();
             log.info("Metadata [{}]", colors.getMeta());
             colors.getData()
-                  .forEach(c -> {
-                      if (c.getColor_name()
-                           .equalsIgnoreCase("reddish brown")) {
-                          log.info("-----------------------------------------------------------");
-                      }
-                      log.info("Colors [{}]", c);
-                  });
+                    .forEach(c -> {
+                        if (c.getColor_name()
+                                .equalsIgnoreCase("reddish brown")) {
+                            log.info("-----------------------------------------------------------");
+                        }
+                        log.info("Colors [{}]", c);
+                    });
 
             BricklinkResource<Color> color = bricklinkRestClient.getColor(12);
             log.info("Metadata [{}]", color.getMeta());
@@ -428,9 +417,9 @@ public class BricklinkTestMain {
             BricklinkResource<List<Category>> categories = bricklinkRestClient.getCategories();
             log.info("Metadata [{}]", categories.getMeta());
             categories.getData()
-                      .forEach(c -> {
-                          log.info("Category [{}]", c);
-                      });
+                    .forEach(c -> {
+                        log.info("Category [{}]", c);
+                    });
 
             BricklinkResource<List<ItemMapping>> itemMapping = bricklinkRestClient.getItemMapping("3666", 7);
             log.info("Metadata [{}]", itemMapping.getMeta());
@@ -445,19 +434,19 @@ public class BricklinkTestMain {
             params.put("filed", "true");
             BricklinkResource<List<Order>> filedOrders = bricklinkRestClient.getOrders(params);
             Stream.concat(currentOrders.getData()
-                                       .stream(), filedOrders.getData()
-                                                             .stream())
-                  .filter(o -> o.getDate_ordered()
-                                .getYear() == 2019)
-                  .forEach(o -> {
-                      log.info("Order [{}]", o);
-                  });
+                            .stream(), filedOrders.getData()
+                            .stream())
+                    .filter(o -> o.getDate_ordered()
+                            .getYear() == 2019)
+                    .forEach(o -> {
+                        log.info("Order [{}]", o);
+                    });
 
             String bogusOrderId = "10000008";
             try {
                 BricklinkResource<Order> bricklinkOrder = bricklinkRestClient.getOrder(bogusOrderId);
                 Order order = Optional.ofNullable(bricklinkOrder.getData())
-                                      .orElseThrow(() -> new Exception("Order Id [%1$s] was not found".formatted(bogusOrderId)));
+                        .orElseThrow(() -> new Exception("Order Id [%1$s] was not found".formatted(bogusOrderId)));
                 log.info("Order Id [{}] = [{}]", bogusOrderId, order);
             } catch (Exception e) {
                 log.error(e.getMessage());
@@ -470,12 +459,12 @@ public class BricklinkTestMain {
             BricklinkResource<List<List<OrderItem>>> orderItemBatches = bricklinkRestClient.getOrderItems(orderId);
             AtomicInteger i = new AtomicInteger();
             orderItemBatches.getData()
-                            .forEach(oib -> {
-                                log.info("\tBatch [{}] -------------------------------------------------------------------------------------------------", i.incrementAndGet());
-                                oib.forEach(oi -> {
-                                    log.info("\t\tOrderItem [{}]", oi);
-                                });
-                            });
+                    .forEach(oib -> {
+                        log.info("\tBatch [{}] -------------------------------------------------------------------------------------------------", i.incrementAndGet());
+                        oib.forEach(oi -> {
+                            log.info("\t\tOrderItem [{}]", oi);
+                        });
+                    });
 
             bricklinkWebService.updateInventoryCondition(191305563L, "U", "C");
         }

@@ -66,7 +66,7 @@ public class MissingItemsRemediator {
         private final BricklinkRestClient bricklinkRestClient;
 
         @Override
-        public void run(String... args) throws Exception {
+        public void run(String... args) {
             Map<Integer, List<ItemInventoryIndexHolder>> itemsByYearMap = new HashMap<>();
             Map<String, Object> params = new HashMap<>();
             BricklinkAjaxClient bricklinkAjaxClient = Feign
